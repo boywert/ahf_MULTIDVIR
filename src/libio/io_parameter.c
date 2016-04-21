@@ -409,7 +409,11 @@ local_printStruct(FILE *f, const io_parameter_t params)
     fprintf(f, "===============================================================================\n");
     fprintf(f, "ic_filename       = %s\n", params->icfile_name);
     fprintf(f, "ic_filetype       = %i\n", (int)(params->ic_filetype));
+#ifdef MULTIDVIR
+    fprintf(f, "outfile_prefix    = %s_rho<DVIR>\n", params->outfile_prefix);
+#else
     fprintf(f, "outfile_prefix    = %s\n", params->outfile_prefix);
+#endif
 //    fprintf(f, "LgridDomain       = %i\n", params->NGRID_DOM);
 //    fprintf(f, "LgridMax          = %i\n", params->NGRID_MAX);
 //    fprintf(f, "NminPerHalo       = %i\n", params->AHF_MINPART);
@@ -417,7 +421,7 @@ local_printStruct(FILE *f, const io_parameter_t params)
 //    fprintf(f, "NperDomCell       = %g\n", params->Nth_dom);
 //    fprintf(f, "NperRefCell       = %g\n", params->Nth_ref);
 //    fprintf(f, "RhoVir            = %i\n", params->UseRhoBack);
-    fprintf(f, "Dvir              = %g\n", params->UserDvir);
+//    fprintf(f, "Dvir              = %g\n", params->UserDvir);
 //    fprintf(f, "MaxGatherRad      = %g Mpc/h\n", params->MaxGatherRad);
 #ifdef WITH_MPI
 //    fprintf(f, "LevelDomainDecomp = %i\n", params->lb_level);

@@ -65,8 +65,10 @@ extern void startrun(char *paramfile, double *timecounter, double *timestep, int
 
 	/* Read the parameters */
 	local_startrunParams(paramfile);
+
 #ifdef MULTIDVIR
 	global_io.params->UserDvir = Dvir;
+	sprintf(global_io.params->outfile_prefix,"%s_rho%10.2f",global_io.params->outfile_prefix,Dvir);
 #endif
 
   /* Now set up the logging */
