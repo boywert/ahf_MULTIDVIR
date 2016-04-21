@@ -59,7 +59,7 @@ local_startrunRetset(double *timecounter,
  *====================================================================================================*/
 extern void startrun(char *paramfile, double *timecounter, double *timestep, int32_t *no_first_timestep, double Dvir)
 {
-  char buf[MAXSTRING];
+  char buf[MAXSTRING],;
 #ifdef EXTRAE_API_USAGE
   Extrae_user_function(1);
 #endif
@@ -69,8 +69,11 @@ extern void startrun(char *paramfile, double *timecounter, double *timestep, int
 
 #ifdef MULTIDVIR
 	global_io.params->UserDvir = Dvir;
-	sprintf(buf,"rho_%10.2lf",Dvir);
-	strcat(global_io.params->outfile_prefix,buf);
+	printf("test 1\n");
+	sprintf(buf,"%s_rho_%10.2lf",global_io.params->outfile_prefix,Dvir);
+	printf("test 2\n");
+	sprintf(global_io.params->outfile_prefix,"%s",buf);
+	printf("test 3\n");
 #endif
 
   /* Now set up the logging */
