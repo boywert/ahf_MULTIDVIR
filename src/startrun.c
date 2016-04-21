@@ -71,7 +71,7 @@ extern void startrun(char *paramfile, double *timecounter, double *timestep, int
 	global_io.params->UserDvir = Dvir;
 	//sprintf(global_io.params->outfile_prefix,"%s",buf);
 	snprintf(buf, MAXSTRING, "%s_rho_%04d", global_io.params->outfile_prefix, (int)(Dvir+0.5));
-	strcat(global_io.params->outfile_prefix,buf);
+	strcpy(global_io.params->outfile_prefix,buf);
 	printf("%s\n",global_io.params->outfile_prefix);
 #endif
 

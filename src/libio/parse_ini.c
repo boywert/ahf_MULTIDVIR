@@ -490,7 +490,11 @@ parse_ini_get_string(parse_ini_t ini,
 		return false;
 
 	/* Duplicate the value */
+#ifndef MULTIDVIR
 	tmp = xstrdup(ini->sections[sec].keys[key].value);
+#else  // MULTIDVIR
+	tmp = strcpy(xmalloc (MAXSTRING),ini->sections[sec].keys[key].value);
+#endif // MULTIDVIR
 	/* Check if the parsing went well */
 	if (tmp == NULL)
 		return false;
