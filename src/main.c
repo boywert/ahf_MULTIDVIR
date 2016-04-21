@@ -48,7 +48,7 @@ static void
 local_focusSphere(void);
 #endif
 
-int runmain(int argc, char **argv); 
+int runmain(int argc, char **argv, double Dvir); 
 /*==============================================================================
  * Enclosure for original main -> runmain
  *==============================================================================*/
@@ -62,9 +62,8 @@ int main(int argc, char **argv) {
 #endif //MPI_TIMING
 #endif // WITH_MPI
 #endif // MULTIDVIR
-
-  runmain(argc,argv);
-  runmain(argc,argv);
+  runmain(argc,argv,200.0);
+  runmain(argc,argv,500.0);
 #ifdef MULTIDVIR
 #ifdef WITH_MPI
   /* Gracefully terminate MPI */
@@ -75,7 +74,7 @@ int main(int argc, char **argv) {
 /*==============================================================================
  * MAIN: where everything starts ....
  *==============================================================================*/ 
-int runmain(int argc, char **argv)
+int runmain(int argc, char **argv, double Dvir)
 {
   gridls  *grid_list;        /* pointer to list of grids            */
   
@@ -164,7 +163,7 @@ int runmain(int argc, char **argv)
   timing.io       -= time(NULL);
   
   timing.startrun -= time(NULL);
-	startrun((argc > 1) ? argv[1] : NULL, &timecounter, &timestep, &no_first_timestep);
+  startrun((argc > 1) ? argv[1] : NULL, &timecounter, &timestep, &no_first_timestep, Dvir);
   timing.startrun += time(NULL);
   
 #ifdef WRITE_GADGET
