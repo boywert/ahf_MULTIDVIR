@@ -59,7 +59,7 @@ local_startrunRetset(double *timecounter,
  *====================================================================================================*/
 extern void startrun(char *paramfile, double *timecounter, double *timestep, int32_t *no_first_timestep, double Dvir)
 {
-  char buf[MAXSTRING],;
+  char buf[MAXSTRING];
 #ifdef EXTRAE_API_USAGE
   Extrae_user_function(1);
 #endif
