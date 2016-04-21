@@ -22,7 +22,8 @@ extern void
 startrun(char *paramfile,
          double *timecounter,
          double *timestep,
-         int32_t *no_first_timestep);
+         int32_t *no_first_timestep,
+	 double Dvir);
 
 /**
  * \brief Small function doing some clean-up work.

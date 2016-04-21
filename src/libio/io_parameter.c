@@ -417,7 +417,7 @@ local_printStruct(FILE *f, const io_parameter_t params)
 //    fprintf(f, "NperDomCell       = %g\n", params->Nth_dom);
 //    fprintf(f, "NperRefCell       = %g\n", params->Nth_ref);
 //    fprintf(f, "RhoVir            = %i\n", params->UseRhoBack);
-//    fprintf(f, "Dvir              = %g\n", params->UserDvir);
+    fprintf(f, "Dvir              = %g\n", params->UserDvir);
 //    fprintf(f, "MaxGatherRad      = %g Mpc/h\n", params->MaxGatherRad);
 #ifdef WITH_MPI
 //    fprintf(f, "LevelDomainDecomp = %i\n", params->lb_level);

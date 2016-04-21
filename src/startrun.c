@@ -57,7 +57,7 @@ local_startrunRetset(double *timecounter,
 /*====================================================================================================
  * startrun()
  *====================================================================================================*/
-extern void startrun(char *paramfile, double *timecounter, double *timestep, int32_t *no_first_timestep)
+extern void startrun(char *paramfile, double *timecounter, double *timestep, int32_t *no_first_timestep, double Dvir)
 {
 #ifdef EXTRAE_API_USAGE
   Extrae_user_function(1);
@@ -65,7 +65,9 @@ extern void startrun(char *paramfile, double *timecounter, double *timestep, int
 
 	/* Read the parameters */
 	local_startrunParams(paramfile);
-
+#ifdef MULTIDVIR
+	global_io.params->UserDvir = Dvir;
+#endif
 
   /* Now set up the logging */
 	local_startrunLog();
