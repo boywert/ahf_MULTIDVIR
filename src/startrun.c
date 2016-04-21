@@ -70,7 +70,7 @@ extern void startrun(char *paramfile, double *timecounter, double *timestep, int
 #ifdef MULTIDVIR
 	global_io.params->UserDvir = Dvir;
 	sprintf(buf,"%s_rho_%8.2f",global_io.params->outfile_prefix,(float)Dvir);
-	sprintf(global_io.params->outfile_prefix,"%s",buf);
+	//sprintf(global_io.params->outfile_prefix,"%s",buf);
 	printf("%s\n",global_io.params->outfile_prefix);
 #endif
 
