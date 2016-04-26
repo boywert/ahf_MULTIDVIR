@@ -48,37 +48,54 @@ static void
 local_focusSphere(void);
 #endif
 
-int runmain(int argc, char **argv, double Dvir); 
+
 /*==============================================================================
  * Enclosure for original main -> runmain
  *==============================================================================*/
-int main(int argc, char **argv) {
 #ifdef MULTIDVIR
+int runmain(int argc, char **argv, double Dvir); 
+int main(int argc, char **argv) {
+  FILE *fp;
+  char buf[MAXSTRING];
+  int i,num_Dvir;
+  double rho;
 #ifdef WITH_MPI
   /* Initialize the MPI environment */
   common_initmpi(&argc, &argv);
 #ifdef MPI_TIMING
   global_mpi.start = MPI_Wtime();
 #endif //MPI_TIMING
-#endif // WITH_MPI
-#endif // MULTIDVIR
-  runmain(argc,argv,200.0);
-  runmain(argc,argv,500.0);
-  runmain(argc,argv,1000.0);
-  runmain(argc,argv,2500.0);
-  runmain(argc,argv,5000.0);
-  runmain(argc,argv,10000.0);
-#ifdef MULTIDVIR
+#endif // WITH_MPI  
+  if(argc<3) {
+    fprintf(stderr,"usage:    %s AMIGA.input  USERDVIR.list\n", argv[0]);
+    exit(1);
+   }
+  fp = fopen(argv[2],"r");
+  if (fp == NULL) perror ("Error opening file");
+  else {
+    if (fscanf(fp, "%d", &num_Dvir) > 0 ) {
+      for(i=0;i<num_Dvir;i++) {
+	fscanf(fp, "%lf", &rho);
+	runmain(argc,argv,rho)
+      }
+    }
+   }
+
 #ifdef WITH_MPI
   /* Gracefully terminate MPI */
   MPI_Finalize();
 #endif  //WITH_MPI
-#endif  //MULTIDVIR
 }
+#endif
+
 /*==============================================================================
  * MAIN: where everything starts ....
  *==============================================================================*/ 
+#ifdef MULTIDVIR
 int runmain(int argc, char **argv, double Dvir)
+#else
+int main(int argc, char **argv)
+#endif
 {
   gridls  *grid_list;        /* pointer to list of grids            */
   
