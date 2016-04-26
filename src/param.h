@@ -17,7 +17,7 @@
 #define AHF_NBIN_MULTIPLIER 1      /* (integer value) increases the number of radial bins by this factor from the standard value */
 #define AHF_HIRES_DM_WEIGHT 1.0
 #define AHF_HOSTHALOLEVEL   1      /* first level to be considered as credible to spawn subbaloes                                */
-#define AHF_HOSTSUBOVERLAP  0.5    /* how far should the subhalo have entered into the host                                      */
+#define AHF_HOSTSUBOVERLAP  1.0    /* how far should the subhalo have entered into the host                                      */
 #define AHF_MIN_REF_OFFSET  0      /* offset for first refinement to be used by AHF                                              */
 #define AHF_RISE            1.00   /* Rho > AHF_RISE*Rho_prev -> rising density                                                  */
 #define AHF_SLOPE           0.99   /* outer halo profile at least like r^-AHF_SLOPE                                              */
