@@ -56,7 +56,6 @@ local_focusSphere(void);
 int runmain(int argc, char **argv, double Dvir); 
 int main(int argc, char **argv) {
   FILE *fp;
-  char buf[MAXSTRING];
   int i,num_Dvir;
   double rho;
 #ifdef WITH_MPI
@@ -76,7 +75,7 @@ int main(int argc, char **argv) {
     if (fscanf(fp, "%d", &num_Dvir) > 0 ) {
       for(i=0;i<num_Dvir;i++) {
 	fscanf(fp, "%lf", &rho);
-	runmain(argc,argv,rho)
+	runmain(argc,argv,rho);
       }
     }
    }
