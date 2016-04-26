@@ -64,6 +64,10 @@ int main(int argc, char **argv) {
 #endif // MULTIDVIR
   runmain(argc,argv,200.0);
   runmain(argc,argv,500.0);
+  runmain(argc,argv,1000.0);
+  runmain(argc,argv,2500.0);
+  runmain(argc,argv,5000.0);
+  runmain(argc,argv,10000.0);
 #ifdef MULTIDVIR
 #ifdef WITH_MPI
   /* Gracefully terminate MPI */
