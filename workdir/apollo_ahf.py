@@ -12,8 +12,8 @@ exec_file = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/bin/AHF-v1.0-084"
 dvirlist = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/USERDVIR.list"
 for i in range(NSnaps):
     os.system("mkdir -p "+outputfolder+"/snap_%03d/"%(i))
-    folder = outputfolder+"/snap_%03d/"%(i)+"/"+str(rho)
-    inputfile = folder+"/config_snap%03d_%d.txt"%(i,rho)
+    folder = outputfolder+"/snap_%03d/"%(i)
+    inputfile = folder+"/config_snap%03d.txt"%(i)
     os.system("mkdir -p "+folder)
     ic_filename = simfolder+"/snapdir_%03d/"%(i) + prefix_input+"_%03d."%(i)
     outfile_prefix = folder+"/"+prefix_template
