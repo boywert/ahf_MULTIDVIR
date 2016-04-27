@@ -24,5 +24,5 @@ for i in range(NSnaps):
     print >> f, "Dvir = 200.0"
     f.close()
     os.system("cat "+template+" >> "+inputfile)
-    cmd = "qsub %s %s %s %s" % (submission_script,exec_file,inputfile,dvirlist)
+    cmd = "qsub %s %s \"%s %s\"" % (submission_script,exec_file,inputfile,dvirlist)
     os.system(cmd)
