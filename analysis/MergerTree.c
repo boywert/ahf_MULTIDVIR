@@ -78,7 +78,7 @@ typedef struct MTREE
   uint64_t haloid[2];
   uint64_t id[2];
   uint64_t npart[2];
-  uint64_t common;
+  double common;
   double   merit;
 } MTREE;
 
@@ -979,7 +979,7 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
   uint64_t  jhalo, khalo, ipart, jpart, ncroco, icroco;
   int64_t   jcroco;
   
-  uint64_t      *common;
+  double      *common;
   
   // reset the actual mtree[] pointer
   if(halos[isimu0][ihalo].mtree != NULL)
@@ -990,7 +990,7 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
   common = NULL;
 
   /* common[] records how many particles ihalo(isimu0) has in common with khalo(isimu1) */
-  common = (uint64_t *) calloc(nHalos[isimu1], sizeof(uint64_t));
+  common = (double *) calloc(nHalos[isimu1], sizeof(double));
   
   for(jpart=0; jpart<halos[isimu0][ihalo].npart; jpart++) {
     ipart = halos[isimu0][ihalo].Pid[jpart];
@@ -998,14 +998,14 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
     /* ipart belongs to nhalos halos in isimu1 */
     for(jhalo=0; jhalo<parts[isimu1][ipart].nhalos; jhalo++) {  // valgrind says "invalid read of size 4" here!?
       khalo          = parts[isimu1][ipart].Hid[jhalo];
-      common[khalo] += 1;
+      common[khalo] += 1.;
     }
   }
   
   /* determine number of credible cross-correlations */
   ncroco = 0;
   for(khalo=0; khalo<nHalos[isimu1]; khalo++) {
-    if(common[khalo] > MINCOMMON)
+    if(common[khalo] > (double)MINCOMMON)
       ncroco++;
   }
   halos[isimu0][ihalo].ncroco = ncroco;
