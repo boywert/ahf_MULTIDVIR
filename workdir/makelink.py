@@ -5,7 +5,7 @@ import subprocess
 import fast3tree
 prefix_input = "62.5_dm"
 prefix_template = "62.5_dm"
-outputfolder = "/lustre/scratch/astro/cs390/codes/ahf_/workdir/halos"
+outputfolder = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/halos"
 NSnaps = 62
 Ncol = 43
 submission_script = "/lustre/scratch/astro/cs390/codes/ahf-v1.0-084/workdir/runmpi.pbs"
