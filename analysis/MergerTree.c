@@ -132,7 +132,7 @@ int      merit_sort             (const void *m1, const void *m2);
  *       simply a wrapper for successive calls to create_mtree()
  *
  *==================================================================================================*/
-int main()
+int main(int argc, char **argv)
 {
   int      i, nFiles, isimu;
   uint64_t ihalo, ipart;
@@ -145,8 +145,8 @@ int main()
   fprintf(stderr,"=======================================================================\n");
   fprintf(stderr,"  construct a cross-correlation between consecutive *_particles files\n");
   fprintf(stderr,"=======================================================================\n");
-  fprintf(stderr,"\nPlease give number of particles files (default=2):      ");
-  scanf("%d", &nFiles);
+  // fprintf(stderr,"\nPlease give number of particles files (default=2):      ");
+  sscanf(argc[1],"%d", &nFiles);
   fprintf(stderr,"%d\n",nFiles);
   
   /* allocate memory for nFiles filenames, each of size MAXSTRING */
@@ -162,7 +162,7 @@ int main()
   for(i=0; i<nFiles; i++)
    {
     fprintf(stderr,"Please give name of %5d. *_particles file:            ",i+1);
-    scanf("%s", HaloFile[i]);
+    sprintf(HaloFile[i],"%s", argv[i+1]);
     fprintf(stderr,"%s\n",HaloFile[i]);
    }
   
@@ -170,7 +170,7 @@ int main()
   for(i=0; i<nFiles-1; i++)
    {
     fprintf(stderr,"Please give prefix for %5d. output file:                 ",i+1);
-    scanf("%s", OutFile[i]);
+    sprintff(OutFile[i],"%s", argv[1+i+nFiles]);
     fprintf(stderr,"%s\n",OutFile[i]);
    }
   fprintf(stderr,"\n");
