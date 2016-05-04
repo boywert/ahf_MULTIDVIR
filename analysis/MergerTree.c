@@ -882,7 +882,7 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
   idx    = NULL;
   
   /* common[] records how many particles ihalo(isimu0) has in common with khalo(isimu1) */
-  common = (double *) calloc(nHalos[isimu1], sizeof(double_t));
+  common = (double *) calloc(nHalos[isimu1], sizeof(double));
   
   for(jpart=0; jpart<halos[isimu0][ihalo].npart; jpart++) {
     ipart = halos[isimu0][ihalo].Pid[jpart];
