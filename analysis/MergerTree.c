@@ -1168,7 +1168,7 @@ void construct_filename(char filename[MAXSTRING], int32_t ifile, char infile[MAX
   suffix[ip] = '\0';
   
   sprintf(infile,"%s/%s%04"PRIi32"%s",path,prefix,ifile,suffix);
-  printf("file = %s\n",infile);
+  
 #ifdef DEBUG3
   fprintf(stderr,"\npath  =%s",path);
   fprintf(stderr,"\nbase  =%s",base);
@@ -1197,7 +1197,7 @@ int32_t count_particles_files(char filename[MAXSTRING])
     nfiles++;
     construct_filename(filename, nfiles, infile);
   }
-  
+  printf("Total file = %d\n",nfiles);
   if(nfiles > pow(10,NDIGITS)-1) {
     fprintf(stderr,"There are nfiles = %"PRIi32" but you are only using NDIGITS = %d to construct the filenames\nABORTING\n",
             nfiles,NDIGITS);
