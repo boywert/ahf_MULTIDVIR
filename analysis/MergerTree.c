@@ -49,7 +49,7 @@
 //#define WITH_QSORT                    // uses qsort() instead of indexx() when ordering the progenitors according to merit function
 
 // support for AHF's MPI output
-//#define READ_MPARTICLES               // support to read multiple _particle files, they must be of the latest AHF _particles file format!
+#define READ_MPARTICLES               // support to read multiple _particle files, they must be of the latest AHF _particles file format!
 #define NDIGITS                 4     // number of digits to be used for fileid
 
 
@@ -1192,8 +1192,6 @@ int32_t count_particles_files(char filename[MAXSTRING])
   
   nfiles = 0;
   construct_filename(filename, nfiles, infile);
-  fprintf(stderr,"There are nfiles = %"PRIi32" from %s\n",
-	  nfiles,infile);
   while ((fp=fopen(infile,"r")) != NULL) {
     fclose(fp);
     nfiles++;
