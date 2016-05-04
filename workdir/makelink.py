@@ -77,7 +77,7 @@ def main():
         pids = []
         print "read halo catalogue"
         for rho in overdensities:
-            outfile_prefix = folder+"/"+str(rho)+"/"+prefix_template+str(rho)
+            
             (halo,pid) = read_ahf_halos_snap(outfile_prefix,z)
             halos.append(halo)
             pids.append(pid)
