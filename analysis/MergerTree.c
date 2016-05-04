@@ -46,7 +46,7 @@
 //#define MTREE_BOTH_WAYS               // make sure that every halo has only one descendant
 //#define SUSSING2013                   // write _mtree in format used for Sussing Merger Trees 2013
 //#define EXCLUSIVE_PARTICLES           // each particle is only allowed to belong to one object (i.e. the lowest mass one)
-//#define WITH_QSORT                    // uses qsort() instead of indexx() when ordering the progenitors according to merit function
+#define WITH_QSORT                    // uses qsort() instead of indexx() when ordering the progenitors according to merit function
 
 // support for AHF's MPI output
 #define READ_MPARTICLES               // support to read multiple _particle files, they must be of the latest AHF _particles file format!
@@ -1117,7 +1117,7 @@ int write_mtree(char OutFile[MAXSTRING])
         fprintf(fpout,"%"PRIu64"\n",
                 halos[0][ihalo].mtree[icroco].haloid[1]);
 #else // SUSSING2013
-        fprintf(fpout,"  %lg  %"PRIu64"  %"PRIu64"\n",
+        fprintf(fpout,"  %lf  %"PRIu64"  %"PRIu64"\n",
                 halos[0][ihalo].mtree[icroco].common,
                 halos[0][ihalo].mtree[icroco].haloid[1],
                 halos[0][ihalo].mtree[icroco].npart[1]);
