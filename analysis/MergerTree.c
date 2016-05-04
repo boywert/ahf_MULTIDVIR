@@ -162,7 +162,7 @@ int main(int argc, char **argv)
   for(i=0; i<nFiles; i++)
    {
     fprintf(stderr,"Please give name of %5d. *_particles file:            ",i+1);
-    sprintf(HaloFile[i],"%s", argv[i+1]);
+    sprintf(HaloFile[i],"%s", argv[i+2]);
     fprintf(stderr,"%s\n",HaloFile[i]);
    }
   
@@ -170,7 +170,7 @@ int main(int argc, char **argv)
   for(i=0; i<nFiles-1; i++)
    {
     fprintf(stderr,"Please give prefix for %5d. output file:                 ",i+1);
-    sprintf(OutFile[i],"%s", argv[1+i+nFiles]);
+    sprintf(OutFile[i],"%s", argv[2+i+nFiles]);
     fprintf(stderr,"%s\n",OutFile[i]);
    }
   fprintf(stderr,"\n");
