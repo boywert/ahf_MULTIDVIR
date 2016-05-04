@@ -70,7 +70,7 @@ def main():
         ahf_halos = []
         rho = overdensities[0]
         desc_folder = outputfolder+"/snap_%03d/multidenshalos"%(isnap)
-        outfile_prefix = folder+"/"+prefix_template+"rho_%04d"%(long(rho+0.5))
+        outfile_prefix = folder+"/"+prefix_template+"_rho_%04d"%(long(rho+0.5))
         z =  get_z(outfile_prefix)
         get_nhalos(outfile_prefix,z)
         halos = []
