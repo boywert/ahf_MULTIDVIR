@@ -865,7 +865,7 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
   uint64_t  jhalo, khalo, ipart, jpart, ncroco, icroco;
   int64_t   jcroco;
   
-  uint64_t      *common;
+  double *common;
   MTREE         *mtree;
   double        *merit;
   long unsigned *idx;
@@ -882,7 +882,7 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
   idx    = NULL;
   
   /* common[] records how many particles ihalo(isimu0) has in common with khalo(isimu1) */
-  common = (uint64_t *) calloc(nHalos[isimu1], sizeof(uint64_t));
+  common = (double *) calloc(nHalos[isimu1], sizeof(double_t));
   
   for(jpart=0; jpart<halos[isimu0][ihalo].npart; jpart++) {
     ipart = halos[isimu0][ihalo].Pid[jpart];
@@ -892,14 +892,14 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
     /* ipart belongs to nhalos halos in isimu1 */
     for(jhalo=0; jhalo<parts[isimu1][ipart].nhalos; jhalo++) {  // valgrind says "invalid read of size 4" here!?
       khalo          = parts[isimu1][ipart].Hid[jhalo];
-      common[khalo] += 1;
+      common[khalo] += 1.;
     }
   }
   
   /* determine number of credible cross-correlations */
   ncroco = 0;
   for(khalo=0; khalo<nHalos[isimu1]; khalo++) {
-    if(common[khalo] > MINCOMMON)
+    if(common[khalo] > (double)MINCOMMON)
       ncroco++;
   }
   halos[isimu0][ihalo].ncroco = ncroco;
@@ -1117,7 +1117,7 @@ int write_mtree(char OutFile[MAXSTRING])
         fprintf(fpout,"%"PRIu64"\n",
                 halos[0][ihalo].mtree[icroco].haloid[1]);
 #else // SUSSING2013
-        fprintf(fpout,"  %"PRIu64"  %"PRIu64"  %"PRIu64"\n",
+        fprintf(fpout,"  %lg  %"PRIu64"  %"PRIu64"\n",
                 halos[0][ihalo].mtree[icroco].common,
                 halos[0][ihalo].mtree[icroco].haloid[1],
                 halos[0][ihalo].mtree[icroco].npart[1]);
