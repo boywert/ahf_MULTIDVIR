@@ -38,8 +38,8 @@
 #include <mpi.h>
 #include <omp.h>
 
-#define MINCOMMON       10            // we only cross-correlate haloes if they at least share MINCOMMON particles
-#define MAX_PARENT_HALO 5	      // maximum number of haloes to which a particle can belong to
+#define MINCOMMON       1           // we only cross-correlate haloes if they at least share MINCOMMON particles
+#define MAX_PARENT_HALO 100000000	      // maximum number of haloes to which a particle can belong to
 #define ONLY_USE_PTYPE 1              // restrict analysis to particles of this type (1 = dark matter)
 //#define EXCLUSIVE_PARTICLES           // each particle is only allowed to belong to one object (i.e. the lowest mass one)
 //#define MTREE_BOTH_WAYS               // make sure that every halo has only one descendant

@@ -1,0 +1,10 @@
+template = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/ahf.template"
+simfolder = "/lustre/scratch/astro/cs390/SUSSING2013_DATA/62.5_ori/"
+prefix_input = "62.5_dm"
+prefix_template = "62.5_dm"
+outputfolder = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/halos"
+NSnaps = 62
+submission_script = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/runmpi.pbs"
+ahf_exec = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/bin/AHF-v1.0-088"
+dvirlist = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/USERDVIR.list"
+mergertree_folder = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/MergerTree"
