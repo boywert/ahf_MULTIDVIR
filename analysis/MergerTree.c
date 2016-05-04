@@ -41,7 +41,7 @@
 /*-------------------------------------------------------------------------------------
  *                                     DEFINES
  *-------------------------------------------------------------------------------------*/
-#define MINCOMMON      10             // we only cross-correlate haloes if they at least share MINCOMMON particles
+#define MINCOMMON      1             // we only cross-correlate haloes if they at least share MINCOMMON particles
 #define ONLY_USE_PTYPE 1              // restrict analysis to particles of this type (1 = dark matter)
 //#define MTREE_BOTH_WAYS               // make sure that every halo has only one descendant
 //#define SUSSING2013                   // write _mtree in format used for Sussing Merger Trees 2013
