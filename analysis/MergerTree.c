@@ -170,7 +170,7 @@ int main(int argc, char **argv)
   for(i=0; i<nFiles-1; i++)
    {
     fprintf(stderr,"Please give prefix for %5d. output file:                 ",i+1);
-    sprintff(OutFile[i],"%s", argv[1+i+nFiles]);
+    sprintf(OutFile[i],"%s", argv[1+i+nFiles]);
     fprintf(stderr,"%s\n",OutFile[i]);
    }
   fprintf(stderr,"\n");
