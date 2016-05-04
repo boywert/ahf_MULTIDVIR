@@ -41,7 +41,7 @@
 /*-------------------------------------------------------------------------------------
  *                                     DEFINES
  *-------------------------------------------------------------------------------------*/
-#define MINCOMMON      1             // we only cross-correlate haloes if they at least share MINCOMMON particles
+#define MINCOMMON      0             // we only cross-correlate haloes if they at least share MINCOMMON particles
 #define ONLY_USE_PTYPE 1              // restrict analysis to particles of this type (1 = dark matter)
 //#define MTREE_BOTH_WAYS               // make sure that every halo has only one descendant
 //#define SUSSING2013                   // write _mtree in format used for Sussing Merger Trees 2013
@@ -892,7 +892,7 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
     /* ipart belongs to nhalos halos in isimu1 */
     for(jhalo=0; jhalo<parts[isimu1][ipart].nhalos; jhalo++) {  // valgrind says "invalid read of size 4" here!?
       khalo          = parts[isimu1][ipart].Hid[jhalo];
-      common[khalo] += 1.;
+      common[khalo] += pow((double) ipart, -2./3.);
     }
   }
   
@@ -998,7 +998,7 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
     /* ipart belongs to nhalos halos in isimu1 */
     for(jhalo=0; jhalo<parts[isimu1][ipart].nhalos; jhalo++) {  // valgrind says "invalid read of size 4" here!?
       khalo          = parts[isimu1][ipart].Hid[jhalo];
-      common[khalo] += 1.;
+       common[khalo] += pow((double) ipart, -2./3.);
     }
   }
   
@@ -1018,7 +1018,7 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
     /* store cross-correlations temporarily for sorting by indexx() */
     icroco = 0;
     for(khalo=0; khalo<nHalos[isimu1]; khalo++) {
-      if(common[khalo] > MINCOMMON){
+      if(common[khalo] > (double)MINCOMMON){
         halos[isimu0][ihalo].mtree[icroco].id[0]     = ihalo;
         halos[isimu0][ihalo].mtree[icroco].haloid[0] = halos[isimu0][ihalo].haloid;
         halos[isimu0][ihalo].mtree[icroco].npart[0]  = halos[isimu0][ihalo].npart;
