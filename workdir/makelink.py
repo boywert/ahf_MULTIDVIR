@@ -8,8 +8,6 @@ prefix_template = "62.5_dm"
 outputfolder = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/halos"
 NSnaps = 62
 Ncol = 43
-submission_script = "/lustre/scratch/astro/cs390/codes/ahf-v1.0-084/workdir/runmpi.pbs"
-#overdensities = [200,500,1000,2500,5000,10000,20000]
 overdensities = [200,1000]
 files_per_snap = 16
 def get_z(prefix):
@@ -72,7 +70,7 @@ def main():
         ahf_halos = []
         rho = overdensities[0]
         desc_folder = outputfolder+"/snap_%03d/multidenshalos"%(isnap)
-        outfile_prefix = folder+"/"+str(rho)+"/"+prefix_template+str(rho)
+        outfile_prefix = folder+"/"+prefix_template+"rho_%04d"%(long(rho+0.5))
         z =  get_z(outfile_prefix)
         get_nhalos(outfile_prefix,z)
         halos = []
