@@ -1192,12 +1192,14 @@ int32_t count_particles_files(char filename[MAXSTRING])
   
   nfiles = 0;
   construct_filename(filename, nfiles, infile);
+  fprintf(stderr,"There are nfiles = %"PRIi32" from %s\n",
+	  nfiles,infile);
   while ((fp=fopen(infile,"r")) != NULL) {
     fclose(fp);
     nfiles++;
     construct_filename(filename, nfiles, infile);
   }
-  fprintf(stderr,"Total file = %d\n",nfiles);
+
   if(nfiles > pow(10,NDIGITS)-1) {
     fprintf(stderr,"There are nfiles = %"PRIi32" but you are only using NDIGITS = %d to construct the filenames\nABORTING\n",
             nfiles,NDIGITS);
