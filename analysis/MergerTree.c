@@ -1168,7 +1168,7 @@ void construct_filename(char filename[MAXSTRING], int32_t ifile, char infile[MAX
   suffix[ip] = '\0';
   
   sprintf(infile,"%s/%s%04"PRIi32"%s",path,prefix,ifile,suffix);
-  
+  printf("file = %s\n",infile);
 #ifdef DEBUG3
   fprintf(stderr,"\npath  =%s",path);
   fprintf(stderr,"\nbase  =%s",base);
