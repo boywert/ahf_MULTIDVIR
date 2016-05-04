@@ -146,7 +146,7 @@ int main(int argc, char **argv)
   fprintf(stderr,"  construct a cross-correlation between consecutive *_particles files\n");
   fprintf(stderr,"=======================================================================\n");
   // fprintf(stderr,"\nPlease give number of particles files (default=2):      ");
-  sscanf(argc[1],"%d", &nFiles);
+  sscanf(argv[1],"%d", &nFiles);
   fprintf(stderr,"%d\n",nFiles);
   
   /* allocate memory for nFiles filenames, each of size MAXSTRING */
