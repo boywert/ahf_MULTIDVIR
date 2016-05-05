@@ -74,25 +74,24 @@ def load_desc(nsnaps,idens):
             with open(filename,"r") as f:
                 # skip 2 header lines
                 buffer = f.read()
-                print buffer
                 buffer = f.read()
                 print buffer
-                while 1:
-                    buffer = f.read()
-                    print buffer
-                    if not buffer: break
-                    data = buffer.split()
-                    hid = long(data[0].strip())
-                    ndesc = long(data[2].strip())
-                    descnlist[firsthalo[isnap]+hid] = ndesc
-                    print data
-                    for i in range(ndesc):
-                        buffer = f.read()
-                        data_d = buffer.split()
-                        if counthalo == len(desc):
-                            desc.resize((len(desc+1000000)))
-                        desc[counthalo] = (long(data[1].strip()),float(data[0].strip()))
-                        counthalo += 1
+                # while 1:
+                #     buffer = f.read()
+                #     print buffer
+                #     if not buffer: break
+                #     data = buffer.split()
+                #     hid = long(data[0].strip())
+                #     ndesc = long(data[2].strip())
+                #     descnlist[firsthalo[isnap]+hid] = ndesc
+                #     print data
+                #     for i in range(ndesc):
+                #         buffer = f.read()
+                #         data_d = buffer.split()
+                #         if counthalo == len(desc):
+                #             desc.resize((len(desc+1000000)))
+                #         desc[counthalo] = (long(data[1].strip()),float(data[0].strip()))
+                #         counthalo += 1
     desc.resize((counthalo))
     print descnlist,desc
     return (descnlist,desc)
