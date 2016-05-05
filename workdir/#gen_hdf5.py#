@@ -39,6 +39,13 @@ def load_halocat(nsnaps,idens):
             for ihalo in range(nhalolist[isnap]):
                 halocat[firsthalo[isnap]+ihalo]['Pos'] = data[ihalo,5:8]
     return (nhalolist,halocat)
+def load_denrelation(nsnaps,idens):
+    nhalolist = get_nhalos(nsnaps,idens)
+    totalhalo = numpy.sum(nhalolist,dtype = numpy.int64)
+    firsthalo = numpy.cumsum(nhalolist,dtype=numpy.int64)-nhalolist
+    for isnap in range(nsnaps):
+        if(nhalolist[isnap] > 0):
+            filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"halo.txt"
 def load_snapshot(alistfile):
     a = numpy.loadtxt(alistfile)
     nsnaps = len(a)
@@ -90,7 +97,13 @@ def convert():
         (nhalolist,halocat) = load_halocat(nsnaps,idens)
         halosnap_snap = halocat_grp[idens].create_dataset('HalosInSnap', data=nhalolist)
         halocat_snap = halocat_grp[idens].create_dataset('Halos', data=halocat)
-    #NHaloSnaps
+        
+    #Group -- DensRelation
+    densrelation_grp = []
+    densrelation_grp = f.create_group("DensRelation")
+    for idens in range(len(overdensities)-1):
+        
+        
     
     
     #Group -- Descendants
