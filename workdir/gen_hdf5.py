@@ -85,6 +85,10 @@ def load_desc(nsnaps,idens):
                     for i in range(ndesc):
                         data = buffer[iline].split()
                         iline += 1
+                        if counthalo == len(desc):
+                            desc.resize((len(desc+1000000)))
+                        desc[counthalo] = (long(data[1].strip()),float(data[0].strip()))
+                        counthalo += 1
                 f.close()
                 #     if not buffer: break
                 #     data = buffer.split()
