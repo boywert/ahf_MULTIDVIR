@@ -50,8 +50,8 @@ def load_denrelation(nsnaps,idens):
         if(nhalolist[isnap] > 0):
             filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+str(overdensities[idens])+"_to_"+str(overdensities[idens+1])+".txt"
             data = open(filename,"r").readlines()
-            for iline in data:
-                in_data = iline.strip()
+            for iline in range(len(data)):
+                in_data = data[iline].strip()
                 denscontainlist[firsthalo[isnap]+iline] = len(in_data)-1
                 for icol in range(1,len(in_data)):
                     if counthalo == len(containlist):
