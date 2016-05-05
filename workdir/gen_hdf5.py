@@ -83,6 +83,7 @@ def load_desc(nsnaps,idens):
                     hid = long(data[0].strip())
                     ndesc = long(data[2].strip())
                     descnlist[firsthalo[isnap]+hid] = ndesc
+                    print data
                     for i in range(ndesc):
                         buffer = f.read()
                         data_d = buffer.split()
