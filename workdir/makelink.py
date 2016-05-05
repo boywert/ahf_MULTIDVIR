@@ -103,6 +103,9 @@ def main():
                             string = "\t".join([str(id) for id in idx])
                             print >> f, "%d\t%s"%(ii,string)
                             hi_halos[idx,1] = ii
+                        else:
+                            print >> f, ii
+                        
                 del(tree)
                 # pos = lo_halos[:,5:8]
                 # with fast3tree.fast3tree(pos) as tree:

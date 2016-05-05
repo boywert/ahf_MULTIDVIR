@@ -43,9 +43,16 @@ def load_denrelation(nsnaps,idens):
     nhalolist = get_nhalos(nsnaps,idens)
     totalhalo = numpy.sum(nhalolist,dtype = numpy.int64)
     firsthalo = numpy.cumsum(nhalolist,dtype=numpy.int64)-nhalolist
+    denscontainlist = numpy.zeros(totalhalo)
     for isnap in range(nsnaps):
         if(nhalolist[isnap] > 0):
-            filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"halo.txt"
+            filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+str(overdensities[idens])+"_to_"+str(overdensities[idens+1])+".txt"
+            data = open(filename,"r").readlines()
+            for iline in data:
+                in_data = iline.strip()
+                
+                for icol in range(len(in_data)):
+                    
 def load_snapshot(alistfile):
     a = numpy.loadtxt(alistfile)
     nsnaps = len(a)
@@ -102,7 +109,7 @@ def convert():
     densrelation_grp = []
     densrelation_grp = f.create_group("DensRelation")
     for idens in range(len(overdensities)-1):
-        
+        den_data = load_denrelation(nsnaps,idens)
         
     
     
