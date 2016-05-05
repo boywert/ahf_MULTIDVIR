@@ -122,7 +122,7 @@ def main():
             f = open(outfile,"w+")
             print>>f, len(hi_index)
             for ihalo in hi_index:
-                print>>f, ihalo,len(pids[i+1][ihalo]])
+                print>>f, ihalo,len(pids[i+1][ihalo])
                 string = "\n".join([str(id)+"\t1" for id in pids[i+1][ihalo]])
                 print>>f,string
             f.close()
@@ -134,7 +134,7 @@ def main():
                 print>>f, len(lo_index)
                 for ihalo in lo_index:
                     #print pids[i+1][ihalo]
-                    print>>f, ihalo,len(pids[i][ihalo]])
+                    print>>f, ihalo,len(pids[i][ihalo])
                     string = "\n".join([str(id)+"\t1" for id in pids[i][ihalo]])
                     print>>f,string
                 f.close()
