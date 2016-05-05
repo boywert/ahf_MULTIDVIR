@@ -106,13 +106,13 @@ def convert():
     #Snap
     snapshot_snap = snapshot_grp.create_dataset('Snap', data=snapshot_data)
 
-    #Group -- HaloCatalogue
-    halocat_grp = []
-    for idens in range(len(overdensities)):
-        halocat_grp.append(f.create_group("HaloCatalogue_"+str(idens)))
-        (nhalolist,halocat) = load_halocat(nsnaps,idens)
-        halosnap_snap = halocat_grp[idens].create_dataset('HalosInSnap', data=nhalolist)
-        halocat_snap = halocat_grp[idens].create_dataset('Halos', data=halocat)
+    # #Group -- HaloCatalogue
+    # halocat_grp = []
+    # for idens in range(len(overdensities)):
+    #     halocat_grp.append(f.create_group("HaloCatalogue_"+str(idens)))
+    #     (nhalolist,halocat) = load_halocat(nsnaps,idens)
+    #     halosnap_snap = halocat_grp[idens].create_dataset('HalosInSnap', data=nhalolist)
+    #     halocat_snap = halocat_grp[idens].create_dataset('Halos', data=halocat)
         
     #Group -- DensRelation
     densrelation_grp = []
