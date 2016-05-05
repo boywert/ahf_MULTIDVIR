@@ -892,7 +892,7 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
     /* ipart belongs to nhalos halos in isimu1 */
     for(jhalo=0; jhalo<parts[isimu1][ipart].nhalos; jhalo++) {  // valgrind says "invalid read of size 4" here!?
       khalo          = parts[isimu1][ipart].Hid[jhalo];
-      common[khalo] += pow((double) ipart, -2./3.);
+      common[khalo] += 1.; //pow((double) ipart, -2./3.);
     }
   }
   
@@ -998,7 +998,7 @@ int create_mtree(uint64_t ihalo, int isimu0, int isimu1)
     /* ipart belongs to nhalos halos in isimu1 */
     for(jhalo=0; jhalo<parts[isimu1][ipart].nhalos; jhalo++) {  // valgrind says "invalid read of size 4" here!?
       khalo          = parts[isimu1][ipart].Hid[jhalo];
-       common[khalo] += pow((double) ipart, -2./3.);
+      common[khalo] += 1.; // pow((double) ipart, -2./3.);
     }
   }
   
