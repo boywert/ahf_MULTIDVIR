@@ -66,7 +66,8 @@ def load_desc(nsnaps,idens):
     totalhalo = numpy.sum(nhalolist,dtype = numpy.int64)
     firsthalo = numpy.cumsum(nhalolist,dtype=numpy.int64)-nhalolist
     desc = numpy.empty(1000000,dtype = struct_halo_share)
-    descnlist = numpy.empty(totalhalo, dtype=numpy.int64)
+    descnlist = numpy.zeros(totalhalo, dtype=numpy.int64)
+    counthalo = 0
     for isnap in range(nsnaps-1):
         if(nhalolist[isnap] > 0):
             filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"_fw_mtree"
@@ -76,10 +77,18 @@ def load_desc(nsnaps,idens):
                     buffer = f.read()
                     if not buffer:
                         break
-                    print buffer
-                        
-                    
-                
+                    data = buffer.split()
+                    hid = long(data[0].strip())
+                    ndesc = long(data[2].strip())
+                    for i in range(ndesc):
+                        buffer = f.read()
+                        data_d = buffer.split()
+                        if counthalo == len(desc):
+                            desc.resize((len(desc+1000000)))
+                        desc[counthalo] = (long(data[1].strip()),float(data[0].strip()))
+                        counthalo += 1
+    desc.resize((counthalo))
+    print descnlist,desc
     return (descnlist,desc)
 def load_prog(nsnaps,idens):
     return (prognlist,prog)
