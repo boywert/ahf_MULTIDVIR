@@ -75,6 +75,11 @@ def load_desc(nsnaps,idens):
                 # skip 2 header lines
                 buffer = f.readlines()
                 print buffer
+                iline = 2;
+                while 1:
+                    data = buffer.split()
+                    if not buffer: break
+                    print data
                 #     if not buffer: break
                 #     data = buffer.split()
                 #     hid = long(data[0].strip())
