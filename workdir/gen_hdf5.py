@@ -74,7 +74,9 @@ def load_desc(nsnaps,idens):
             with open(filename,"r") as f:
                 # skip 2 header lines
                 buffer = f.read()
+                print buffer
                 buffer = f.read()
+                print buffer
                 while 1:
                     buffer = f.read()
                     print buffer
