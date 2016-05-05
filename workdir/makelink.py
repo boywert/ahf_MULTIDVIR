@@ -59,86 +59,95 @@ def read_ahf_particles(filename,counthalo,pids):
         counthalo += 1
     return counthalo,pids
 def main():
-    for isnap in range(NSnaps):
-        print "snap",isnap
-        folder = outputfolder+"/snap_%03d/"%(isnap)
-        ahf_halos = []
-        rho = overdensities[0]
-        desc_folder = outputfolder+"/snap_%03d/multidenshalos"%(isnap)
-        outfile_prefix = folder+"/"+prefix_template+"_rho_%04d"%(long(rho+0.5))
-        z =  get_z(outfile_prefix)
-        #get_nhalos(outfile_prefix,z)
-        halos = []
-        pids = []
-        print "read halo catalogue"
-        for rho in overdensities:
-            outfile_prefix = folder+"/"+prefix_template+"_rho_%04d"%(long(rho+0.5))
-            (halo,pid) = read_ahf_halos_snap(outfile_prefix,z)
-            halos.append(halo)
-            pids.append(pid)
-        for i in range(len(overdensities)-1):
-            print "doing rho =",overdensities[i]
-            lo_index = numpy.where(halos[i][:,1]==0)[0]
-            lo_halos = halos[i][lo_index]
-            hi_index = numpy.where(halos[i+1][:,1]==0)[0]
-            hi_halos = halos[i+1][hi_index]
-            lo_halos[:,0:2] = -1
-            hi_halos[:,0:2] = -1
-            for ih in range(len(lo_halos)):
-                lo_halos[ih,0] = ih
-            for ih in range(len(hi_halos)):
-                hi_halos[ih,0] = ih
-            os.system("mkdir -p "+folder+"/multilevels/")
-            outfile = folder+"/multilevels/"+str(overdensities[i])+"_to_"+str(overdensities[i+1])+".txt"
-            f = open(outfile,"w")
-            if len(hi_halos) & len(lo_halos):
-                pos = hi_halos[:,5:8]
-                with fast3tree.fast3tree(pos) as tree:
-                    tree.set_boundaries(0.0,boxsize_kpc)
-                    tree.rebuild_boundaries()
-                    for ii in range(len(lo_halos)):
-                        h = lo_halos[ii]
-                        idx = tree.query_radius(h[5:8],h[11], periodic=True,output='index')
-                        if len(idx)>0:
-                            string = "\t".join([str(id) for id in idx])
-                            print >> f, "%d\t%s"%(ii,string)
-                            hi_halos[idx,1] = ii
-                del(tree)
-                # pos = lo_halos[:,5:8]
-                # with fast3tree.fast3tree(pos) as tree:
-                #     tree.set_boundaries(0.0,boxsize_kpc)
-                #     tree.rebuild_boundaries()
-                #     for ii in range(len(hi_halos)):
-                #         h = hi_halos[ii]
-                #         idx = tree.query_radius(h[5:8],h[11], periodic=True,output='index')
-                #         if len(idx)>0:
-                #             if(idx[0]>=len(lo_halos)):
-                #                 print "something is wrong, idx = ",idx,len(lo_halos)
-                #             lo_halos[idx[0],0] = ii
-                # del(tree)
-            f.close()
-            outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i+1])+"halo.txt"
-            numpy.savetxt(outfile,hi_halos)
-            outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i+1])+"particle.txt"
-            f = open(outfile,"w+")
-            print>>f, len(hi_index)
-            for ihalo in hi_index:
-                print>>f, ihalo,len(pids[i+1][ihalo])
-                string = "\n".join([str(id)+"\t1" for id in pids[i+1][ihalo]])
-                print>>f,string
-            f.close()
-            if i == 0:
-                outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i])+"halo.txt"
-                numpy.savetxt(outfile,lo_halos)
-                outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i])+"particle.txt"
-                f = open(outfile,"w+")
-                print>>f, len(lo_index)
-                for ihalo in lo_index:
-                    #print pids[i+1][ihalo]
-                    print>>f, len(pids[i][ihalo]),ihalo
-                    string = "\n".join([str(id)+"\t1" for id in pids[i][ihalo]])
-                    print>>f,string
-                f.close()
+    # for isnap in range(NSnaps):
+    #     print "snap",isnap
+    #     folder = outputfolder+"/snap_%03d/"%(isnap)
+    #     ahf_halos = []
+    #     rho = overdensities[0]
+    #     desc_folder = outputfolder+"/snap_%03d/multidenshalos"%(isnap)
+    #     outfile_prefix = folder+"/"+prefix_template+"_rho_%04d"%(long(rho+0.5))
+    #     z =  get_z(outfile_prefix)
+    #     #get_nhalos(outfile_prefix,z)
+    #     halos = []
+    #     pids = []
+    #     print "read halo catalogue"
+    #     for rho in overdensities:
+    #         outfile_prefix = folder+"/"+prefix_template+"_rho_%04d"%(long(rho+0.5))
+    #         (halo,pid) = read_ahf_halos_snap(outfile_prefix,z)
+    #         halos.append(halo)
+    #         pids.append(pid)
+    #     for i in range(len(overdensities)-1):
+    #         print "doing rho =",overdensities[i]
+    #         lo_index = numpy.where(halos[i][:,1]==0)[0]
+    #         lo_halos = halos[i][lo_index]
+    #         hi_index = numpy.where(halos[i+1][:,1]==0)[0]
+    #         hi_halos = halos[i+1][hi_index]
+    #         lo_halos[:,0:2] = -1
+    #         hi_halos[:,0:2] = -1
+    #         for ih in range(len(lo_halos)):
+    #             lo_halos[ih,0] = ih
+    #         for ih in range(len(hi_halos)):
+    #             hi_halos[ih,0] = ih
+    #         os.system("mkdir -p "+folder+"/multilevels/")
+    #         outfile = folder+"/multilevels/"+str(overdensities[i])+"_to_"+str(overdensities[i+1])+".txt"
+    #         f = open(outfile,"w")
+    #         if len(hi_halos) & len(lo_halos):
+    #             pos = hi_halos[:,5:8]
+    #             with fast3tree.fast3tree(pos) as tree:
+    #                 tree.set_boundaries(0.0,boxsize_kpc)
+    #                 tree.rebuild_boundaries()
+    #                 for ii in range(len(lo_halos)):
+    #                     h = lo_halos[ii]
+    #                     idx = tree.query_radius(h[5:8],h[11], periodic=True,output='index')
+    #                     if len(idx)>0:
+    #                         string = "\t".join([str(id) for id in idx])
+    #                         print >> f, "%d\t%s"%(ii,string)
+    #                         hi_halos[idx,1] = ii
+    #             del(tree)
+    #             # pos = lo_halos[:,5:8]
+    #             # with fast3tree.fast3tree(pos) as tree:
+    #             #     tree.set_boundaries(0.0,boxsize_kpc)
+    #             #     tree.rebuild_boundaries()
+    #             #     for ii in range(len(hi_halos)):
+    #             #         h = hi_halos[ii]
+    #             #         idx = tree.query_radius(h[5:8],h[11], periodic=True,output='index')
+    #             #         if len(idx)>0:
+    #             #             if(idx[0]>=len(lo_halos)):
+    #             #                 print "something is wrong, idx = ",idx,len(lo_halos)
+    #             #             lo_halos[idx[0],0] = ii
+    #             # del(tree)
+    #         f.close()
+    #         outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i+1])+"halo.txt"
+    #         numpy.savetxt(outfile,hi_halos)
+    #         outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i+1])+"particle.txt"
+    #         f = open(outfile,"w+")
+    #         print>>f, len(hi_index)
+    #         for ihalo in hi_index:
+    #             print>>f, ihalo,len(pids[i+1][ihalo])
+    #             string = "\n".join([str(id)+"\t1" for id in pids[i+1][ihalo]])
+    #             print>>f,string
+    #         f.close()
+    #         if i == 0:
+    #             outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i])+"halo.txt"
+    #             numpy.savetxt(outfile,lo_halos)
+    #             outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i])+"particle.txt"
+    #             f = open(outfile,"w+")
+    #             print>>f, len(lo_index)
+    #             for ihalo in lo_index:
+    #                 #print pids[i+1][ihalo]
+    #                 print>>f, len(pids[i][ihalo]),ihalo
+    #                 string = "\n".join([str(id)+"\t1" for id in pids[i][ihalo]])
+    #                 print>>f,string
+    #             f.close()
+    for isnap in range(NSnaps-1):
+        folder_1 = outputfolder+"/snap_%03d/"%(isnap)
+        folder_2 = outputfolder+"/snap_%03d/"%(isnap+1)
+        for i in range(len(overdensities)):
+            infile = folder_1+"/multilevels/"+prefix_template+str(overdensities[i])+"particle.txt"
+            outfile = folder_2+"/multilevels/"+prefix_template+str(overdensities[i])+"particle.txt"
+            mtree_file = folder_1+"/multilevels/"+prefix_template+str(overdensities[i])
+            qsub_com = "qsub runsingle.pbs \"%s %d %s %s %s\""%(mergertree_exec,2,infile,outfile,mtree_file)
+            os.system(qsub_com)
 if __name__ == "__main__":
     main()
 
