@@ -52,11 +52,11 @@ def load_denrelation(nsnaps,idens):
             data = open(filename,"r").readlines()
             for iline in range(len(data)):
                 in_data = data[iline].strip()
-                print in_data
                 denscontainlist[firsthalo[isnap]+iline] = len(in_data)-1
                 for icol in range(1,len(in_data)):
                     if counthalo == len(containlist):
                         containlist.resize((len(containlist+1000000)))
+                    print in_data[icol]
                     containlist[counthalo] = long(in_data[icol])
                     counthalo += 1
     containlist.resize((counthalo))
