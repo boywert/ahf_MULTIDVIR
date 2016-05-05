@@ -59,6 +59,7 @@ def load_denrelation(nsnaps,idens):
                     containlist[counthalo] = long(in_data[icol].strip())
                     counthalo += 1
     containlist.resize((counthalo))
+    print denscontainlist
     print containlist
     return (denscontainlist,containlist)
                     
