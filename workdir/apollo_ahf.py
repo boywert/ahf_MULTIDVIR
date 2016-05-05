@@ -1,6 +1,6 @@
 import os
 import sys
-from global import *
+from globals import *
 
 def run_ahf():
     for i in range(NSnaps):
