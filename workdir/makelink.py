@@ -135,7 +135,7 @@ def main():
                 print>>f, len(lo_index)
                 for ihalo in lo_index:
                     #print pids[i+1][ihalo]
-                    print>>f, ihalo,len(pids[i][ihalo])
+                    print>>f, len(pids[i][ihalo]),ihalo
                     string = "\n".join([str(id)+"\t1" for id in pids[i][ihalo]])
                     print>>f,string
                 f.close()
