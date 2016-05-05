@@ -81,6 +81,7 @@ def convert():
 
     #Group -- HaloCatalogue
     halocat_grp = f.create_group("HaloCatalogue")
+    load_halocat(nsnaps,0)
     #NSnap
     halocat_grp.attrs['NSnap'] = numpy.int32(nsnaps)
     #NHaloSnaps
