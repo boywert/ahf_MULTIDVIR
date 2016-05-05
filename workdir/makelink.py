@@ -3,13 +3,8 @@ import sys
 import numpy
 import subprocess
 import fast3tree
-prefix_input = "62.5_dm"
-prefix_template = "62.5_dm"
-outputfolder = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/halos"
-NSnaps = 62
-Ncol = 43
-overdensities = [200,1000]
-files_per_snap = 16
+from globals import *
+
 def get_z(prefix):
     filename = prefix+".parameter"
     a = float(subprocess.check_output(["grep","^a ",filename]).split()[1])
@@ -77,7 +72,6 @@ def main():
         pids = []
         print "read halo catalogue"
         for rho in overdensities:
-            
             (halo,pid) = read_ahf_halos_snap(outfile_prefix,z)
             halos.append(halo)
             pids.append(pid)
@@ -89,13 +83,17 @@ def main():
             hi_halos = halos[i+1][hi_index]
             lo_halos[:,0:2] = -1
             hi_halos[:,0:2] = -1
+            for i in range(lo_halos):
+                lo_halos[i,0] = i
+            for i in range(hi_halos):
+                hi_halos[i,0] = i
             os.system("mkdir -p "+folder+"/multilevels/")
             outfile = folder+"/multilevels/"+str(overdensities[i])+"_to_"+str(overdensities[i+1])+".txt"
             f = open(outfile,"w")
             if len(hi_halos) & len(lo_halos):
                 pos = hi_halos[:,5:8]
                 with fast3tree.fast3tree(pos) as tree:
-                    tree.set_boundaries(0.0,62500.0)
+                    tree.set_boundaries(0.0,boxsize_kpc)
                     tree.rebuild_boundaries()
                     for ii in range(len(lo_halos)):
                         h = lo_halos[ii]
@@ -105,18 +103,18 @@ def main():
                             print >> f, "%d\t%s"%(ii,string)
                             hi_halos[idx,1] = ii
                 del(tree)
-                pos = lo_halos[:,5:8]
-                with fast3tree.fast3tree(pos) as tree:
-                    tree.set_boundaries(0.0,62500.0)
-                    tree.rebuild_boundaries()
-                    for ii in range(len(hi_halos)):
-                        h = hi_halos[ii]
-                        idx = tree.query_radius(h[5:8],h[11], periodic=True,output='index')
-                        if len(idx)>0:
-                            if(idx[0]>=len(lo_halos)):
-                                print "something is wrong, idx = ",idx,len(lo_halos)
-                            lo_halos[idx[0],0] = ii
-                del(tree)
+                # pos = lo_halos[:,5:8]
+                # with fast3tree.fast3tree(pos) as tree:
+                #     tree.set_boundaries(0.0,boxsize_kpc)
+                #     tree.rebuild_boundaries()
+                #     for ii in range(len(hi_halos)):
+                #         h = hi_halos[ii]
+                #         idx = tree.query_radius(h[5:8],h[11], periodic=True,output='index')
+                #         if len(idx)>0:
+                #             if(idx[0]>=len(lo_halos)):
+                #                 print "something is wrong, idx = ",idx,len(lo_halos)
+                #             lo_halos[idx[0],0] = ii
+                # del(tree)
             f.close()
             outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i+1])+"halo.txt"
             numpy.savetxt(outfile,hi_halos)

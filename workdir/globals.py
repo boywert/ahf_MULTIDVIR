@@ -11,3 +11,4 @@ mergertree_folder = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/Mer
 Ncol = 43
 overdensities = [200,1000]
 files_per_snap = 16
+boxsize_kpc = 625000.0 
