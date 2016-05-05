@@ -59,8 +59,6 @@ def load_denrelation(nsnaps,idens):
                     containlist[counthalo] = long(in_data[icol].strip())
                     counthalo += 1
     containlist.resize((counthalo))
-    print denscontainlist
-    print containlist
     return (denscontainlist,containlist)
                     
 def load_snapshot(alistfile):
@@ -120,7 +118,8 @@ def convert():
     densrelation_grp = f.create_group("DensRelation")
     for idens in range(len(overdensities)-1):
         (denscontainlist,containlist) = load_denrelation(nsnaps,idens)
-        
+        halosnap_snap = densrelation_grp[idens].create_dataset('NHalosContained', data=denscontainlist)
+        halocat_snap = densrelation_grp[idens].create_dataset('HalosContained', data=containlist)        
     
     
     #Group -- Descendants
