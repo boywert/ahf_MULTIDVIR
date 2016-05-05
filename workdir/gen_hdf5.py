@@ -29,9 +29,9 @@ def load_halocat(nsnaps,idens):
     firsthalo = numpy.cumsum(nhalolist,dtype=numpy.int64)-nhalolist
     halocat = numpy.empty(totalhalo,dtype = struct_ahf_halos)
     for isnap in range(nsnaps):
-        filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"halo.txt"
-        data = numpy.loadtxt(filename)
-        if(len(data) > 0):
+        if(nhalolist[isnap] > 0):
+            filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"halo.txt"
+            data = numpy.loadtxt(filename)
             if len(data.shape) == 1:
                 data.shape = (1,43)
             halocat[firsthalo[isnap]:firsthalo[isnap]+nhalolist[isnap]]['haloID'] = data[:,0].astype(numpy.int32)
