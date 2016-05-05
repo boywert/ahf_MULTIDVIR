@@ -35,10 +35,10 @@ def load_halocat(nsnaps,idens):
             if len(data.shape) == 1:
                 data.shape = (1,43)
             halocat[firsthalo[isnap]:firsthalo[isnap]+nhalolist[isnap]]['haloID'] = data[:,0].astype(numpy.int32)
-        #print data
-        #halocat[firsthalo[isnap]:firsthalo[isnap]+nhalolist[isnap]]['Mass'] = data[:,3]
-        #for ihalo in range(nhalolist[isnap]):
-        #    halocat[firsthalo[isnap]+ihalo]['Pos'] = data[ihalo,5:8]
+            halocat[firsthalo[isnap]:firsthalo[isnap]+nhalolist[isnap]]['Mass'] = data[:,3]
+            for ihalo in range(nhalolist[isnap]):
+                halocat[firsthalo[isnap]+ihalo]['Pos'] = data[ihalo,5:8]
+    return (nhalolist,halocat)
 def load_snapshot(alistfile):
     a = numpy.loadtxt(alistfile)
     nsnaps = len(a)
@@ -84,10 +84,12 @@ def convert():
     snapshot_snap = snapshot_grp.create_dataset('Snap', data=snapshot_data)
 
     #Group -- HaloCatalogue
-    halocat_grp = f.create_group("HaloCatalogue")
-    load_halocat(nsnaps,0)
-    #NSnap
-    halocat_grp.attrs['NSnap'] = numpy.int32(nsnaps)
+    halocat_grp = []
+    for idens in range(len(overdensities)):
+        halocat_grp.append(f.create_group("HaloCatalogue_"+str(idens)))
+        (nhalolist,halocat) = load_halocat(nsnaps,idens)
+        halosnap_snap = halocat_grp[idens].create_dataset('HalosInSnap', data=nhalolist)
+        
     #NHaloSnaps
     
     
