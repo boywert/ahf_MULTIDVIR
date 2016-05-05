@@ -71,10 +71,11 @@ def load_desc(nsnaps,idens):
         if(nhalolist[isnap] > 0):
             filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"_mtree"
             with open(filename,"r") as f:
-                buffer = f.read()
-                buffer = f.read()
                 while 1:
-                    f.read()
+                    buffer = f.read()
+                    if not buffer:
+                        break
+                        
                     
                 
     return (descnlist,desc)
