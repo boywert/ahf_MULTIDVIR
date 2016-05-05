@@ -73,12 +73,8 @@ def load_desc(nsnaps,idens):
             filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"_fw_mtree"
             with open(filename,"r") as f:
                 # skip 2 header lines
-                buffer = f.read()
-                buffer = f.read()
+                buffer = f.readlines()
                 print buffer
-                while 1:
-                    buffer = f.read()
-                    print buffer
                 #     if not buffer: break
                 #     data = buffer.split()
                 #     hid = long(data[0].strip())
