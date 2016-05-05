@@ -76,7 +76,7 @@ def convert():
     snapshot_snap = snapshot_grp.create_dataset('Snap', data=snapshot_data)
 
     #Group -- HaloCatalogue
-    halocat_grp = f.creat_group("HaloCatalogue")
+    halocat_grp = f.create_group("HaloCatalogue")
     #NSnap
     halocat_grp.attrs['NSnap'] = numpy.int32(nsnaps)
     #NHaloSnaps
