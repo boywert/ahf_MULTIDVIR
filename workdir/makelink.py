@@ -120,9 +120,10 @@ def main():
             numpy.savetxt(outfile,hi_halos)
             outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i+1])+"particle.txt"
             f = open(outfile,"w+")
+            print>>f, len(hi_index)
             for ihalo in hi_index:
-                #print pids[i][ihalo]
-                string = "\t".join([str(id) for id in pids[i+1][ihalo]])
+                print>>f, ihalo,len(pids[i+1][ihalo]])
+                string = "\n".join([str(id)+"\t1" for id in pids[i+1][ihalo]])
                 print>>f,string
             f.close()
             if i == 0:
@@ -130,9 +131,11 @@ def main():
                 numpy.savetxt(outfile,lo_halos)
                 outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i])+"particle.txt"
                 f = open(outfile,"w+")
+                print>>f, len(lo_index)
                 for ihalo in lo_index:
                     #print pids[i+1][ihalo]
-                    string = "\t".join([str(id) for id in pids[i][ihalo]])
+                    print>>f, ihalo,len(pids[i][ihalo]])
+                    string = "\n".join([str(id)+"\t1" for id in pids[i][ihalo]])
                     print>>f,string
                 f.close()
 if __name__ == "__main__":
