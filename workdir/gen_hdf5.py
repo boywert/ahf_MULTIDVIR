@@ -31,8 +31,10 @@ def load_halocat(nsnaps,idens):
     for isnap in range(nsnaps):
         filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"halo.txt"
         data = numpy.loadtxt(filename)
-        #halocat[firsthalo[isnap]:firsthalo[isnap]+nhalolist[isnap]]['haloID'] = data[:,0].astype(numpy.int32)
-        print data
+        if len(data.shape) == 1:
+            data.shape = (1,43)
+        halocat[firsthalo[isnap]:firsthalo[isnap]+nhalolist[isnap]]['haloID'] = data[:,0].astype(numpy.int32)
+        #print data
         #halocat[firsthalo[isnap]:firsthalo[isnap]+nhalolist[isnap]]['Mass'] = data[:,3]
         #for ihalo in range(nhalolist[isnap]):
         #    halocat[firsthalo[isnap]+ihalo]['Pos'] = data[ihalo,5:8]
