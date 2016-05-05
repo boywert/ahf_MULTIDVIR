@@ -76,6 +76,7 @@ def load_desc(nsnaps,idens):
                     buffer = f.read()
                     if not buffer:
                         break
+                    print buffer
                         
                     
                 
