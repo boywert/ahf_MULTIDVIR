@@ -115,11 +115,11 @@ def convert():
         
     #Group -- DensRelation
     densrelation_grp = []
-    densrelation_grp = f.create_group("DensRelation")
     for idens in range(len(overdensities)-1):
+        densrelation_grp.append(f.create_group("DensRelation_"+str(idens)))
         (denscontainlist,containlist) = load_denrelation(nsnaps,idens)
-        halosnap_snap = densrelation_grp[idens].create_dataset('NHalosContained', data=denscontainlist)
-        halocat_snap = densrelation_grp[idens].create_dataset('HalosContained', data=containlist)        
+        halosnap_snap = densrelation_grp[idens].create_dataset("NHalosContained", data=denscontainlist)
+        halocat_snap = densrelation_grp[idens].create_dataset("HalosContained", data=containlist)        
     
     
     #Group -- Descendants
