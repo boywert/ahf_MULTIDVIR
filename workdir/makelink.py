@@ -83,9 +83,9 @@ def main():
             hi_halos = halos[i+1][hi_index]
             lo_halos[:,0:2] = -1
             hi_halos[:,0:2] = -1
-            for i in range(lo_halos):
+            for i in range(len(lo_halos)):
                 lo_halos[i,0] = i
-            for i in range(hi_halos):
+            for i in range(len(hi_halos)):
                 hi_halos[i,0] = i
             os.system("mkdir -p "+folder+"/multilevels/")
             outfile = folder+"/multilevels/"+str(overdensities[i])+"_to_"+str(overdensities[i+1])+".txt"
