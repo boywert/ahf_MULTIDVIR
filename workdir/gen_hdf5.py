@@ -60,6 +60,26 @@ def load_denrelation(nsnaps,idens):
                     counthalo += 1
     containlist.resize((counthalo))
     return (denscontainlist,containlist)
+
+def load_desc(nsnaps,idens):
+    nhalolist = get_nhalos(nsnaps,idens)
+    totalhalo = numpy.sum(nhalolist,dtype = numpy.int64)
+    firsthalo = numpy.cumsum(nhalolist,dtype=numpy.int64)-nhalolist
+    desc = numpy.empty(1000000,dtype = struct_halo_share)
+    descnlist = numpy.empty(totalhalo, dtype=numpy.int64)
+    for isnap in range(nsnaps):
+        if(nhalolist[isnap] > 0):
+            filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"_mtree"
+            with open(filename,"r") as fp:
+                buffer = f.read()
+                buffer = f.read()
+                while 1:
+                    f.read()
+                    
+                
+    return (descnlist,desc)
+def load_prog(nsnaps,idens):
+    return (prognlist,prog)
                     
 def load_snapshot(alistfile):
     a = numpy.loadtxt(alistfile)
@@ -114,14 +134,21 @@ def convert():
     #     halocat_snap = halocat_grp[idens].create_dataset('Halos', data=halocat)
         
     #Group -- DensRelation
-    densrelation_grp = []
+    # densrelation_grp = []
+    # for idens in range(len(overdensities)-1):
+    #     densrelation_grp.append(f.create_group("DensRelation_"+str(idens)))
+    #     (denscontainlist,containlist) = load_denrelation(nsnaps,idens)
+    #     denrelationlist_list = densrelation_grp[idens].create_dataset("NHalosContained", data=denscontainlist)
+    #     denrelation_list = densrelation_grp[idens].create_dataset("HalosContained", data=containlist)        
+    
+    #Group -- Descendants
+    descendants_grp = []
     for idens in range(len(overdensities)-1):
-        densrelation_grp.append(f.create_group("DensRelation_"+str(idens)))
-        (denscontainlist,containlist) = load_denrelation(nsnaps,idens)
-        halosnap_snap = densrelation_grp[idens].create_dataset("NHalosContained", data=denscontainlist)
-        halocat_snap = densrelation_grp[idens].create_dataset("HalosContained", data=containlist)        
-    
-    
+        descendants_grp.append(f.create_group("Descendant_"+str(idens)))
+        (descendantlist,descendant) = load_descendant(nsnaps,idens)
+        descendantlist_list = descendants_grp[idens].create_dataset("NHalosDescendant", data=descendantlist)
+        descendant_list = descendants_grp[idens].create_dataset("HalosDescendant", data=descendant)      
+
     #Group -- Descendants
     
 
