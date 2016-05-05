@@ -6,12 +6,12 @@ import h5py
 import numpy.lib.recfunctions as rfn
 from globals import *
 struct_ahf_halos = numpy.dtype([
-    ('haloID',numpy.int32,1),
+    ('haloID',numpy.int64,1),
     ('Mass',numpy.float32,1),
     ('Pos',numpy.float32,3)
 ])
 struct_halo_share = numpy.dtype([
-    ('haloID',numpy.int32,1),
+    ('haloID',numpy.int64,1),
     ('share',numpy.float32,1)
 ])
 def get_nhalos(nsnaps,idens):
@@ -34,11 +34,33 @@ def load_halocat(nsnaps,idens):
             data = numpy.loadtxt(filename)
             if len(data.shape) == 1:
                 data.shape = (1,43)
-            halocat[firsthalo[isnap]:firsthalo[isnap]+nhalolist[isnap]]['haloID'] = data[:,0].astype(numpy.int32)
+            halocat[firsthalo[isnap]:firsthalo[isnap]+nhalolist[isnap]]['haloID'] = data[:,0].astype(numpy.int64)
             halocat[firsthalo[isnap]:firsthalo[isnap]+nhalolist[isnap]]['Mass'] = data[:,3]
             for ihalo in range(nhalolist[isnap]):
                 halocat[firsthalo[isnap]+ihalo]['Pos'] = data[ihalo,5:8]
     return (nhalolist,halocat)
+def load_denrelation(nsnaps,idens):
+    nhalolist = get_nhalos(nsnaps,idens)
+    totalhalo = numpy.sum(nhalolist,dtype = numpy.int64)
+    firsthalo = numpy.cumsum(nhalolist,dtype=numpy.int64)-nhalolist
+    denscontainlist = numpy.zeros(totalhalo, dtype=numpy.int64)
+    containlist = numpy.zeros(1000000,dtype=numpy.int64)
+    counthalo = 0
+    for isnap in range(nsnaps):
+        if(nhalolist[isnap] > 0):
+            filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+str(overdensities[idens])+"_to_"+str(overdensities[idens+1])+".txt"
+            data = open(filename,"r").readlines()
+            for iline in data:
+                in_data = iline.strip()
+                denscontainlist[firsthalo[isnap]+iline] = len(in_data)-1
+                for icol in range(1,len(in_data)):
+                    if counthalo == len(containlist):
+                        containlist.resize((len(containlist+1000000)))
+                    containlist[counthalo] = long(in_data[icol])
+                    counthalo += 1
+    containlist.resize((counthalo))
+    return (denscontainlist,containlist)
+                    
 def load_snapshot(alistfile):
     a = numpy.loadtxt(alistfile)
     nsnaps = len(a)
@@ -90,7 +112,13 @@ def convert():
         (nhalolist,halocat) = load_halocat(nsnaps,idens)
         halosnap_snap = halocat_grp[idens].create_dataset('HalosInSnap', data=nhalolist)
         halocat_snap = halocat_grp[idens].create_dataset('Halos', data=halocat)
-    #NHaloSnaps
+        
+    #Group -- DensRelation
+    densrelation_grp = []
+    densrelation_grp = f.create_group("DensRelation")
+    for idens in range(len(overdensities)-1):
+        (denscontainlist,containlist) = load_denrelation(nsnaps,idens)
+        
     
     
     #Group -- Descendants
