@@ -8,3 +8,6 @@ submission_script = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/run
 ahf_exec = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/bin/AHF-v1.0-088"
 dvirlist = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/USERDVIR.list"
 mergertree_folder = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/MergerTree"
+Ncol = 43
+overdensities = [200,1000]
+files_per_snap = 16
