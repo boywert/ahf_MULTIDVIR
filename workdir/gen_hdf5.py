@@ -61,7 +61,7 @@ def load_denrelation(nsnaps,idens):
     containlist.resize((counthalo))
     return (denscontainlist,containlist)
 
-def load_mtree(nsnaps,idens):
+def load_desc(nsnaps,idens):
     nhalolist = get_nhalos(nsnaps,idens)
     totalhalo = numpy.sum(nhalolist,dtype = numpy.int64)
     firsthalo = numpy.cumsum(nhalolist,dtype=numpy.int64)-nhalolist
