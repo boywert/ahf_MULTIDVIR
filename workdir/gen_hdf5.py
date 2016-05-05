@@ -16,11 +16,11 @@ struct_halo_share = numpy.dtype([
 ])
 def get_nhalos(nsnaps,idens):
     nhalolist = numpy.zeros(nsnaps,dtype=numpy.int64)
-    for i in range(nsnaps):
+    for isnap in range(nsnaps):
         filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"particle.txt"
         f = open(filename,"r")
         buf = f.readline()
-        nhalolist[i] = long(buf)
+        nhalolist[isnap] = long(buf)
         f.close()
     return nhalolist
 def load_halocat(nsnaps,idens):
