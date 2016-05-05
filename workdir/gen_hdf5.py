@@ -47,7 +47,7 @@ def convert():
     nlevels = len(dens)
     denslevel_grp = f.create_group("DensityLevels")
     denslevel_grp.attrs['NLevels'] = numpy.int32(nlevels)
-    denslevel_level = snapshot_grp.create_dataset('DensLevel', data=dens_array)
+    denslevel_level = denslevel_grp.create_dataset('DensLevel', data=dens_array)
     
     #Group -- Snapshot
     snapshot_grp = f.create_group("Snapshots")
