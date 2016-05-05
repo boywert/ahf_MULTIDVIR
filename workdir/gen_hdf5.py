@@ -6,8 +6,8 @@ import h5py
 import numpy.lib.recfunctions as rfn
 
 struct_ahf_halos = numpy.dtype([
-    ('haloID',numpy.int32,1)
-    ('Mass',numpy.float32,1)
+    ('haloID',numpy.int32,1),
+    ('Mass',numpy.float32,1),
     ('Pos',numpy.float32,3)
 ])
 
