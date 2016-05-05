@@ -79,6 +79,7 @@ def load_desc(nsnaps,idens):
                     data = buffer[iline].split()
                     if not buffer: break
                     print data
+                    iline += 1
                 #     if not buffer: break
                 #     data = buffer.split()
                 #     hid = long(data[0].strip())
