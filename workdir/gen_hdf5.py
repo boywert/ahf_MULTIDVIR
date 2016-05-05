@@ -10,8 +10,27 @@ struct_ahf_halos = numpy.dtype([
     ('Mass',numpy.float32,1),
     ('Pos',numpy.float32,3)
 ])
-
-
+struct_halo_share = numpy.dtype([
+    ('haloID',numpy.int32,1),
+    ('share',numpy.float32,1)
+])
+def get_nhalos(nsnaps,idens):
+    nhalolist = numpy.zeros(nsnaps,dtype=numpy.int64)
+    for i in range(nsnaps):
+        filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"particle.txt"
+        f = open(filename,"r")
+        buf = f.readline()
+        nhalolist[i] = long(buf)
+        f.close()
+    return nhalolist
+def load_halocat(nsnaps,idens):
+    nhalolist = get_nhalos(nsnaps,idens)
+    totalhalo = numpy.sum(nhalolist,dtype = numpy.int64)
+    firsthalo = numpy.cumsum(nhalolist,dtype=numpy.int64)-nhalolist
+    halocat = numpy.empty(totalhalo,dtype = struct_ahf_halos)
+    for isnap in range(nsnaps):
+        filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"halo.txt"
+        data = numpy.loadtxt(filename)
 def load_snapshot(alistfile):
     a = numpy.loadtxt(alistfile)
     nsnaps = len(a)
@@ -42,9 +61,8 @@ def convert():
     f.attrs.create('Sigma8', 0.807, dtype=numpy.float32)
 
     #Group -- Density Level
-    dens = [200.0,1000.0]
-    dens_array = numpy.array(dens)
-    nlevels = len(dens)
+    dens_array = numpy.array(overdensities)
+    nlevels = len(overdensities)
     denslevel_grp = f.create_group("DensityLevels")
     denslevel_grp.attrs['NLevels'] = numpy.int32(nlevels)
     denslevel_level = denslevel_grp.create_dataset('DensLevel', data=dens_array)
@@ -53,10 +71,15 @@ def convert():
     snapshot_grp = f.create_group("Snapshots")
     (nsnaps,snapshot_data) = load_snapshot(alistfile)
     #NSnap
-    print numpy.int32(nsnaps)
     snapshot_grp.attrs['NSnap'] = numpy.int32(nsnaps)
     #Snap
     snapshot_snap = snapshot_grp.create_dataset('Snap', data=snapshot_data)
+
+    #Group -- HaloCatalogue
+    halocat_grp = f.creat_group("HaloCatalogue")
+    #NSnap
+    halocat_grp.attrs['NSnap'] = numpy.int32(nsnaps)
+    #NHaloSnaps
     
     
     #Group -- Descendants
