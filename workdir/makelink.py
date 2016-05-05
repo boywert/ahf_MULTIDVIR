@@ -67,11 +67,12 @@ def main():
         desc_folder = outputfolder+"/snap_%03d/multidenshalos"%(isnap)
         outfile_prefix = folder+"/"+prefix_template+"_rho_%04d"%(long(rho+0.5))
         z =  get_z(outfile_prefix)
-        get_nhalos(outfile_prefix,z)
+        #get_nhalos(outfile_prefix,z)
         halos = []
         pids = []
         print "read halo catalogue"
         for rho in overdensities:
+            outfile_prefix = folder+"/"+prefix_template+"_rho_%04d"%(long(rho+0.5))
             (halo,pid) = read_ahf_halos_snap(outfile_prefix,z)
             halos.append(halo)
             pids.append(pid)
@@ -85,7 +86,7 @@ def main():
             hi_halos[:,0:2] = -1
             for ih in range(len(lo_halos)):
                 lo_halos[ih,0] = ih
-            for ii in range(len(hi_halos)):
+            for ih in range(len(hi_halos)):
                 hi_halos[ih,0] = ih
             os.system("mkdir -p "+folder+"/multilevels/")
             outfile = folder+"/multilevels/"+str(overdensities[i])+"_to_"+str(overdensities[i+1])+".txt"
