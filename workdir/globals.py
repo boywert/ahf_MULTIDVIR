@@ -6,6 +6,7 @@ outputfolder = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/halos"
 NSnaps = 62
 submission_script = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/runmpi.pbs"
 ahf_exec = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/bin/AHF-v1.0-088"
+mergertree_exec = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/bin/MergerTree"
 dvirlist = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/USERDVIR.list"
 mergertree_folder = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/MergerTree"
 Ncol = 43
