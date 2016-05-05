@@ -77,8 +77,15 @@ def load_desc(nsnaps,idens):
                 iline = 2;
                 while iline < len(buffer):
                     data = buffer[iline].split()
-                    print data
                     iline += 1
+                    hid = long(data[0].strip())
+                    ndesc = long(data[2].strip())
+                    descnlist[firsthalo[isnap]+hid] = ndesc
+                    print data
+                    for i in range(ndesc):
+                        data = buffer[iline].split()
+                        iline += 1
+                f.close()
                 #     if not buffer: break
                 #     data = buffer.split()
                 #     hid = long(data[0].strip())
