@@ -85,27 +85,43 @@ def load_desc(nsnaps,idens):
                         data = buffer[iline].split()
                         iline += 1
                         if counthalo == len(desc):
-                            desc.resize((len(desc+1000000)))
+                            desc.resize((len(desc)+1000000))
                         desc[counthalo] = (long(data[1].strip()),float(data[0].strip()))
                         counthalo += 1
                 f.close()
-                #     if not buffer: break
-                #     data = buffer.split()
-                #     hid = long(data[0].strip())
-                #     ndesc = long(data[2].strip())
-                #     descnlist[firsthalo[isnap]+hid] = ndesc
-                #     print data
-                #     for i in range(ndesc):
-                #         buffer = f.read()
-                #         data_d = buffer.split()
-                #         if counthalo == len(desc):
-                #             desc.resize((len(desc+1000000)))
-                #         desc[counthalo] = (long(data[1].strip()),float(data[0].strip()))
-                #         counthalo += 1
     desc.resize((counthalo))
     print descnlist,desc
     return (descnlist,desc)
 def load_prog(nsnaps,idens):
+    nhalolist = get_nhalos(nsnaps,idens)
+    totalhalo = numpy.sum(nhalolist,dtype = numpy.int64)
+    firsthalo = numpy.cumsum(nhalolist,dtype=numpy.int64)-nhalolist
+    prog = numpy.empty(1000000,dtype = struct_halo_share)
+    prognlist = numpy.zeros(totalhalo, dtype=numpy.int64)
+    counthalo = 0
+    for isnap in range(1,nsnaps):
+        if(nhalolist[isnap] > 0):
+            filename = outputfolder+"/snap_%03d/"%(isnap)+"/multilevels/"+prefix_template+str(overdensities[idens])+"_rw_mtree"
+            with open(filename,"r") as f:
+                # skip 2 header lines
+                buffer = f.readlines()
+                iline = 2;
+                while iline < len(buffer):
+                    data = buffer[iline].split()
+                    iline += 1
+                    hid = long(data[0].strip())
+                    nprog = long(data[2].strip())
+                    descnlist[firsthalo[isnap]+hid] = nprog
+                    for i in range(nprog):
+                        data = buffer[iline].split()
+                        iline += 1
+                        if counthalo == len(prog):
+                            prog.resize((len(prog)+1000000))
+                        prog[counthalo] = (long(data[1].strip()),float(data[0].strip()))
+                        counthalo += 1
+                f.close()
+    prog.resize((counthalo))
+    print prognlist,prog
     return (prognlist,prog)
                     
 def load_snapshot(alistfile):
@@ -176,8 +192,13 @@ def convert():
         descendantlist_list = descendants_grp[idens].create_dataset("NHalosDescendant", data=descendantlist)
         descendant_list = descendants_grp[idens].create_dataset("HalosDescendant", data=descendant)      
 
-    #Group -- Descendants
-    
+    #Group -- Progenitors
+    progenitors_grp = []
+    for idens in range(len(overdensities)-1):
+        progenitors_grp.append(f.create_group("Progenitors_"+str(idens)))
+        (progenitorlist,progenitor) = load_desc(nsnaps,idens)
+        progenitorlist_list = progenitors_grp[idens].create_dataset("NHalosProgenitor", data=progenitorlist)
+        progenitor_list = progenitors_grp[idens].create_dataset("HalosProgenitor", data=progenitor)         
 
 
 def main():
