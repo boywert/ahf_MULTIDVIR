@@ -124,9 +124,10 @@ def main():
             outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i+1])+"particle.txt"
             f = open(outfile,"w+")
             print>>f, len(hi_index)
-            for ihalo in hi_index:
-                print>>f, len(pids[i+1][ihalo]),ihalo
-                string = "\n".join([str(id)+"\t1" for id in pids[i+1][ihalo]])
+            for ihalo in range(len(hi_index)):
+                id_halo = hi_index[ihalo]
+                print>>f, len(pids[i+1][id_halo]),ihalo
+                string = "\n".join([str(id)+"\t1" for id in pids[i+1][id_halo]])
                 print>>f,string
             f.close()
             if i == 0:
@@ -135,10 +136,10 @@ def main():
                 outfile = folder+"/multilevels/"+prefix_template+str(overdensities[i])+"particle.txt"
                 f = open(outfile,"w+")
                 print>>f, len(lo_index)
-                for ihalo in lo_index:
-                    #print pids[i+1][ihalo]
-                    print>>f, len(pids[i][ihalo]),ihalo
-                    string = "\n".join([str(id)+"\t1" for id in pids[i][ihalo]])
+                for ihalo in range(len(lo_index)):
+                    id_halo = lo_index[ihalo]
+                    print>>f, len(pids[i][id_halo]),ihalo
+                    string = "\n".join([str(id)+"\t1" for id in pids[i][id_halo]])
                     print>>f,string
                 f.close()
     for isnap in range(NSnaps-1):
