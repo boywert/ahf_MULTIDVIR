@@ -185,21 +185,24 @@ def convert():
         denrelation_list = densrelation_grp[idens].create_dataset("HalosContained", data=containlist)        
     
     #Group -- Descendants
+    icount = 0
     descendants_grp = []
     for idens in range(len(overdensities)-1):
         descendants_grp.append(f.create_group("Descendant_"+str(idens)))
         (descendantlist,descendant) = load_desc(nsnaps,idens)
-        descendantlist_list = descendants_grp[idens].create_dataset("NHalosDescendant", data=descendantlist)
-        descendant_list = descendants_grp[idens].create_dataset("HalosDescendant", data=descendant)      
+        descendantlist_list = descendants_grp[icount].create_dataset("NHalosDescendant", data=descendantlist)
+        descendant_list = descendants_grp[icount].create_dataset("HalosDescendant", data=descendant)
+        icount += 1
 
     #Group -- Progenitors
+    icount = 0
     progenitors_grp = []
     for idens in range(1,len(overdensities)):
         progenitors_grp.append(f.create_group("Progenitors_"+str(idens)))
         (progenitorlist,progenitor) = load_prog(nsnaps,idens)
-        progenitorlist_list = progenitors_grp[idens].create_dataset("NHalosProgenitor", data=progenitorlist)
-        progenitor_list = progenitors_grp[idens].create_dataset("HalosProgenitor", data=progenitor)         
-
+        progenitorlist_list = progenitors_grp[icount].create_dataset("NHalosProgenitor", data=progenitorlist)
+        progenitor_list = progenitors_grp[icount].create_dataset("HalosProgenitor", data=progenitor)         
+        icount += 1
 
 def main():
     convert()
