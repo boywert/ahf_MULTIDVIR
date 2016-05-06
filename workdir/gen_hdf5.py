@@ -196,7 +196,7 @@ def convert():
     progenitors_grp = []
     for idens in range(len(overdensities)-1):
         progenitors_grp.append(f.create_group("Progenitors_"+str(idens)))
-        (progenitorlist,progenitor) = load_desc(nsnaps,idens)
+        (progenitorlist,progenitor) = load_prog(nsnaps,idens)
         progenitorlist_list = progenitors_grp[idens].create_dataset("NHalosProgenitor", data=progenitorlist)
         progenitor_list = progenitors_grp[idens].create_dataset("HalosProgenitor", data=progenitor)         
 
