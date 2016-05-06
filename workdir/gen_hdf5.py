@@ -194,7 +194,7 @@ def convert():
 
     #Group -- Progenitors
     progenitors_grp = []
-    for idens in range(len(overdensities)-1):
+    for idens in range(1,len(overdensities)):
         progenitors_grp.append(f.create_group("Progenitors_"+str(idens)))
         (progenitorlist,progenitor) = load_prog(nsnaps,idens)
         progenitorlist_list = progenitors_grp[idens].create_dataset("NHalosProgenitor", data=progenitorlist)
