@@ -111,7 +111,7 @@ def load_prog(nsnaps,idens):
                     iline += 1
                     hid = long(data[0].strip())
                     nprog = long(data[2].strip())
-                    print firsthalo[isnap],hid
+                    print isnap,firsthalo[isnap],hid,totalhalo
                     prognlist[firsthalo[isnap]+hid] = nprog
                     for i in range(nprog):
                         data = buffer[iline].split()
