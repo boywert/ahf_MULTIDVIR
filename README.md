@@ -17,7 +17,7 @@ How to use this code?
 - Edit template/apollo_single.pbs (SGE) or create one for your system
 
 - Edit globals.py (python file containing parameters) 
-
+  
 - Compile AHF:
   	  ```
   	  make clean && make
@@ -30,7 +30,7 @@ How to use this code?
 	  
 - Wait until all jobs in the queue completed. Now we have AHF catalogue of all snapshots and overdensities.
 
-- Run makelink.py to link halos between overdensity groups and automatedly submit the merger graph linking into the system queue.
+- Run makelink.py to link halos between overdensity groups and automatedly submit the merger graph linking jobs into the system queue.
       ```
       python makelink.py
       ```
