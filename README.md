@@ -10,11 +10,16 @@ How to use this code?
 
 - Edit AHF-v1.0-088/Makefile.config and template/ahf.template according to the run and the system.
 
+- Edit USERDVIR.list for the DVIR list
+
 - Compile AHF:
   	  ```
   	  make clean && make
 	  ```
-- Run AHF
+- Run AHF:
+      ```
+      mpirun -np [Ncpus] bin/AHF template/ahf.template USERDVIR.list
+      ```
 
 - Edit globals.py (python file containing parameters)
 
