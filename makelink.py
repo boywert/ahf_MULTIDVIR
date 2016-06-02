@@ -150,9 +150,9 @@ def main():
             outfile = folder_2+"/multilevels/"+prefix_template+str(overdensities[i])+"particle.txt"
             mtree_file_fw = folder_1+"/multilevels/"+prefix_template+str(overdensities[i])+"_fw"
             mtree_file_rw = folder_2+"/multilevels/"+prefix_template+str(overdensities[i])+"_rw"
-            qsub_com = "qsub runsingle.pbs \"%s %d %s %s %s\""%(mergertree_exec,2,infile,outfile,mtree_file_fw)
+            qsub_com = "qsub "+submission_script_single+" \"%s %d %s %s %s\""%(mergertree_exec,2,infile,outfile,mtree_file_fw)
             os.system(qsub_com)
-            qsub_com = "qsub runsingle.pbs \"%s %d %s %s %s\""%(mergertree_exec,2,outfile,infile,mtree_file_rw)
+            qsub_com = "qsub "+submission_script_single+" \"%s %d %s %s %s\""%(mergertree_exec,2,outfile,infile,mtree_file_rw)
             os.system(qsub_com)
 if __name__ == "__main__":
     main()

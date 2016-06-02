@@ -17,7 +17,7 @@ def run_ahf():
         print >> f, "Dvir = 200.0"
         f.close()
         os.system("cat "+template+" >> "+inputfile)
-        cmd = "qsub %s %s \"%s %s\"" % (submission_script,ahf_exec,inputfile,dvirlist)
+        cmd = "qsub %s %s \"%s %s\"" % (submission_script_mpi,ahf_exec,inputfile,dvirlist)
         os.system(cmd)
 def main():
     run_ahf()
