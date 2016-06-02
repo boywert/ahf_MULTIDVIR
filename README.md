@@ -23,14 +23,14 @@ How to use this code?
   	  make clean && make
 	  ```
 	  
-- Run AHF (automated to do all snapshots):
+- Run AHF (automated submission to do all snapshots):
   ```
 	python run_ahf.py
   ```
 	  
 - Wait until all jobs in the queue completed. Now we have AHF catalogue of all snapshots and overdensities.
 
-- Run makelink.py to link halos between overdensity groups and submit the merger graph linking into the system queue.
+- Run makelink.py to link halos between overdensity groups and automatedly submit the merger graph linking into the system queue.
       ```
       python makelink.py
       ```
