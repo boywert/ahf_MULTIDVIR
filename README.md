@@ -3,7 +3,8 @@ How to use this code?
 
 - Get the code and compile:
 
-       ```git clone https://github.com/boywert/ahf_MULTIDVIR
+       ```
+       git clone https://github.com/boywert/ahf_MULTIDVIR
        cd ahf_MULTIDVIR
        ```
 
