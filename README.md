@@ -24,9 +24,9 @@ How to use this code?
 	  ```
 	  
 - Run AHF (automated to do all snapshots):
-      	  ```
-	  python run_ahf.py
-	  ```
+  ```
+  python run_ahf.py
+  ```
 	  
 - Wait until all jobs in the queue completed. Now we have AHF catalogue of all snapshots and overdensities.
 
