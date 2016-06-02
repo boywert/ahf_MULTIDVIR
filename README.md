@@ -35,9 +35,9 @@ How to use this code?
       python makelink.py
       ```
 - Wait until all jobs in the queue completed. Now we have all linking required but they are still in internal format. To generate HDF5 file:
-       ```
-       python gen_hdf5.py
-       ```
+  ```
+	python gen_hdf5.py
+	```
 - Everything should be done.
 
 
