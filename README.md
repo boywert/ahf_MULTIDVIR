@@ -28,11 +28,15 @@ How to use this code?
 	  ```
 - Wait until all jobs in the queue completed. Now we have AHF catalogue of all snapshots and overdensities.
 
-- Run makelink.py to link halos between overdensity groups and submit
-      the merger graph linking into the system queue.  ``` python
-      makelink.py ``` - Wait until all jobs in the queue
-      completed. Now we have all linking required but they are still
-      in internal format. To generate
+- Run makelink.py to link halos between overdensity groups and submit the merger graph linking into the system queue.
+      ```
+      python makelink.py
+      ```
+- Wait until all jobs in the queue completed. Now we have all linking required but they are still in internal format. To generate HDF5 file:
+       ```
+       python gen_hdf5.py
+       ```
+- Everything should be done.
 
 
 
