@@ -1,0 +1,11 @@
+How to use this code?
+
+1. Get the code and compile:
+
+git clone https://github.com/boywert/ahf_MULTIDVIR
+cd ahf_MULTIDVIR
+make
+
+2. Edit globals.py (python file contain parameters)
+
+2. Run AHF ()
