@@ -1,0 +1,14 @@
+#!/bin/sh
+#$ -N custom
+#$ -cwd
+#$ -pe openmpi 16
+#$ -j y
+#$ -q mps.q
+#$ -S /bin/bash
+
+module add sge
+module add gcc/4.8.1
+module add intel-mpi/64/4.1.1/036
+module add gsl/gcc/1.15
+source /home/c/cs/cs390/boyd_python/bin/activate
+mpirun -np 16 $1 $2

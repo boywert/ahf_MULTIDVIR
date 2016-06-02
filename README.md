@@ -12,6 +12,8 @@ How to use this code?
 
 - Edit USERDVIR.list for the DVIR list
 
+- Edit globals.py (python file containing parameters) 
+
 - Compile AHF:
   	  ```
   	  make clean && make
@@ -21,6 +23,6 @@ How to use this code?
       mpirun -np [Ncpus] bin/AHF template/ahf.template USERDVIR.list
       ```
 
-- Edit globals.py (python file containing parameters)
+
 
 
