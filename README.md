@@ -12,17 +12,27 @@ How to use this code?
 
 - Edit USERDVIR.list for the DVIR list
 
+- Edit template/apollo_mpi.pbs (SGE) or create one for your system
+
+- Edit template/apollo_single.pbs (SGE) or create one for your system
+
 - Edit globals.py (python file containing parameters) 
 
 - Compile AHF:
   	  ```
   	  make clean && make
 	  ```
-- Run AHF:
-      ```
-      mpirun -np [Ncpus] bin/AHF template/ahf.template USERDVIR.list
-      ```
+- Run AHF (automated to do all snapshots):
+      	  ```
+	  python run_ahf.py
+	  ```
+- Wait until all jobs in the queue completed. Now we have AHF catalogue of all snapshots and overdensities.
 
+- Run makelink.py to link halos between overdensity groups and submit
+      the merger graph linking into the system queue.  ``` python
+      makelink.py ``` - Wait until all jobs in the queue
+      completed. Now we have all linking required but they are still
+      in internal format. To generate
 
 
 
