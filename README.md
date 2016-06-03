@@ -8,9 +8,9 @@ How to use this code?
        cd ahf_MULTIDVIR
        ```
 
-- Edit AHF-v1.0-088/Makefile.config and template/ahf.template according to the run and the system.
+- Edit AHF-v1.0-088/Makefile.config and template/ahf.template according to the run and the system (See AHF documentation).
 
-- Edit USERDVIR.list for the DVIR list
+- Edit USERDVIR.list for the DVIR list.
 
 - Edit template/apollo_mpi.pbs (SGE) or create one for your system
 
