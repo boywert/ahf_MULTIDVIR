@@ -73,6 +73,7 @@ int main(int argc, char **argv) {
   if (fp == NULL) perror ("Error opening file");
   else {
     if (fscanf(fp, "%d", &num_Dvir) > 0 ) {
+      printf("num_Dvir = %d\n",num_Dvir);
       for(i=0;i<num_Dvir;i++) {
 	fscanf(fp, "%lf", &rho);
 	printf("running Dvir = %lf\n",rho);
