@@ -58,6 +58,7 @@ int main(int argc, char **argv) {
   FILE *fp;
   int i,num_Dvir;
   double rho;
+  char buf_string[2048];
 #ifdef WITH_MPI
   /* Initialize the MPI environment */
   common_initmpi(&argc, &argv);
@@ -72,15 +73,18 @@ int main(int argc, char **argv) {
   fp = fopen(argv[2],"r");
   if (fp == NULL) perror ("Error opening file");
   else {
-    if (fscanf(fp, "%d", &num_Dvir) > 0 ) {
-      printf("num_Dvir = %d\n",num_Dvir);
+    fgets(buf_string,2048,fp);
+    if (sscanf(buf_string, "%d", &num_Dvir) > 0 ) {
       for(i=0;i<num_Dvir;i++) {
-	fscanf(fp, "%lf", &rho);
-	printf("running Dvir = %lf\n",rho);
-	runmain(argc,argv,rho);
+	if((fgets(buf_string,2048,fp))!=NULL) {
+	  sscanf(buf_string, "%lf", &rho);
+	  printf("running Dvir = %lf\n",rho);
+	  runmain(argc,argv,rho);
+	}
       }
     }
    }
+  fclose(fp);
 
 #ifdef WITH_MPI
   /* Gracefully terminate MPI */
