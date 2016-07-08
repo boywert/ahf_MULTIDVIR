@@ -75,6 +75,7 @@ int main(int argc, char **argv) {
     if (fscanf(fp, "%d", &num_Dvir) > 0 ) {
       for(i=0;i<num_Dvir;i++) {
 	fscanf(fp, "%lf", &rho);
+	printf("running Dvir = %lf\n",rho);
 	runmain(argc,argv,rho);
       }
     }
