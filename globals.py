@@ -32,7 +32,7 @@ files_per_snap = 16
 
 
 # The boxsize in kpc/h
-boxsize_kpc = 625000.0 
+boxsize_kpc = 62500.0 
 
 submission_script_mpi = "template/apollo_mpi.pbs"
 
