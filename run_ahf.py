@@ -18,6 +18,8 @@ def run_ahf():
         f.close()
         os.system("cat "+template+" >> "+inputfile)
         cmd = "qsub %s %s \"%s %s\"" % (submission_script_mpi,ahf_exec,inputfile,dvirlist)
+        #cmd = "%s %s %s" % (ahf_exec,inputfile,dvirlist)
+        #print cmd
         os.system(cmd)
 def main():
     run_ahf()

@@ -1,10 +1,10 @@
 # Setting for AHF parameter file
-template = "/lustre/scratch/astro/cs390/codes/ahf_MULTIDVIR/workdir/ahf.template"
+template = "template/ahf.template"
 
 
 # The location of N-Body file
 # We are mainly using GADGET
-simfolder = "/lustre/scratch/astro/cs390/SUSSING2013_DATA/62.5_ori/"
+simfolder = "data/62.5_ori/"
 
 
 # Prefix of the GADGET file
@@ -50,7 +50,7 @@ ahf_exec = "bin/AHF"
 mergertree_exec = "bin/MergerTree"
 
 # The location of CUSTOM_DVIR list for AHF (you can ignore it)
-dvirlist = outputfolder+"/USERDVIR.list"
+dvirlist = "USERDVIR.list"
 
 
 # The list of expansion rate of all snapshot (you can ignore this for GADGET)
