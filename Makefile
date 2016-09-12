@@ -3,11 +3,11 @@ all: AHF MergerTree
 AHF:
 	mkdir -p bin
 	${MAKE} -C ${AHF_FOLDER}
-	ln -s ${AHF_FOLDER}/bin/${AHF_FOLDER} bin/AHF
+	ln -s  $(CURDIR)/${AHF_FOLDER}/bin/${AHF_FOLDER} bin/AHF
 MergerTree:
 	mkdir -p bin
 	${MAKE} MergerTree -C ${AHF_FOLDER}
-	ln -s ${AHF_FOLDER}/bin/MergerTree bin/MergerTree
+	ln -s  $(CURDIR)/${AHF_FOLDER}/bin/MergerTree bin/MergerTree
 clean:
 	rm -f bin/*
 	${MAKE} clean -C ${AHF_FOLDER}
