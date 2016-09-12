@@ -4,7 +4,7 @@ all:
 	cd ${AHF_FOLDER};\
 	${MAKE} -C ${AHF_FOLDER};\
 	${MAKE} MergerTree ${AHF_FOLDER};\
-	mv ${AHF_FOLDER}/bin/* ../bin
+	cp -f ${AHF_FOLDER}/bin/* ../bin
 	cd bin;\
 	ln -s AHF-v1.0-088 AHF;\
 	cd ..
