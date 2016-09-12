@@ -5,7 +5,10 @@ all:
 	${MAKE};\
 	${MAKE} MergerTree;\
 	mv bin/* ../bin
-	ln -s bin/AHF-v1.0-088 bin/AHF
+	cd ..;\
+	cd bin;\
+	ln -s AHF-v1.0-088 AHF;\
+	cd ..
 clean:
 	rm -f bin/*;\
 	cd ${AHF_FOLDER};\

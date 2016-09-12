@@ -22,6 +22,9 @@ network_file = "network.hdf5"
 # Total number of snapshots
 NSnaps = 62
 
+# The list of expansion rate of all snapshots
+alistfile = "zlist_MR7.txt"
+
 
 # The list of overdensity to use (rho_critical) [see ]
 overdensities = [200,1000]
@@ -32,7 +35,7 @@ files_per_snap = 16
 
 
 # The boxsize in kpc/h
-boxsize_kpc = 625000.0 
+boxsize_kpc = 62500.0 
 
 submission_script_mpi = "template/apollo_mpi.pbs"
 
@@ -53,5 +56,4 @@ mergertree_exec = "bin/MergerTree"
 dvirlist = outputfolder+"/USERDVIR.list"
 
 
-# The list of expansion rate of all snapshot (you can ignore this for GADGET)
-alistfile = "template/alist.txt"
+
