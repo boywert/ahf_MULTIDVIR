@@ -1,14 +1,13 @@
 AHF_FOLDER=AHF-v1.0-088
-all:
+all: AHF MergerTree
+AHF:
 	mkdir -p bin
 	${MAKE} -C ${AHF_FOLDER};\
-	${MAKE} MergerTree -C ${AHF_FOLDER};\
 	ln -s ${AHF_FOLDER}/bin/${AHF_FOLDER} bin/AHF;\
-	ln -s ${AHF_FOLDER}/bin/* bin/;\
-	
-	#cd bin;\
-	#ln -s AHF-v1.0-088 AHF;\
-	#cd ..
+MergerTree:
+	mkdir -p bin
+	${MAKE} MergerTree -C ${AHF_FOLDER};\
+	ln -s ${AHF_FOLDER}/bin/MergerTree bin/MergerTree;\
 clean:
 	rm -f bin/*;\
 	cd ${AHF_FOLDER};\
