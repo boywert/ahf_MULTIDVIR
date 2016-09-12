@@ -10,5 +10,4 @@ MergerTree:
 	ln -s ${AHF_FOLDER}/bin/MergerTree bin/MergerTree
 clean:
 	rm -f bin/*
-	cd ${AHF_FOLDER}
-	${MAKE} clean
+	${MAKE} clean -C ${AHF_FOLDER}
