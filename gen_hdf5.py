@@ -127,11 +127,8 @@ def load_prog(nsnaps,idens):
 def load_snapshot(alistfile):
     a = numpy.loadtxt(alistfile)
     nsnaps = len(a)
-    print nsnaps
-    print a
     return (nsnaps,a)
 def convert():
-    folder = "/Users/boywert/TestCodes/treedata/"
     f = h5py.File("network.hdf5", 'w')
     # Version
     f.attrs.create('Version', 1, dtype=numpy.int32)
@@ -152,7 +149,7 @@ def convert():
     f.attrs.create('H100', 0.704, dtype=numpy.float32)
     # Sigma8
     f.attrs.create('Sigma8', 0.807, dtype=numpy.float32)
-
+    
     #Group -- Density Level
     dens_array = numpy.array(overdensities)
     nlevels = len(overdensities)
@@ -196,6 +193,7 @@ def convert():
 
     #Group -- Progenitors
     icount = 0
+    print "test"
     progenitors_grp = []
     for idens in range(len(overdensities)):
         progenitors_grp.append(f.create_group("Progenitors_"+str(idens)))
