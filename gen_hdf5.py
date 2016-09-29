@@ -187,7 +187,7 @@ def convert():
     #Group -- Descendants
     icount = 0
     descendants_grp = []
-    for idens in range(len(overdensities)-1):
+    for idens in range(len(overdensities)):
         descendants_grp.append(f.create_group("Descendant_"+str(idens)))
         (descendantlist,descendant) = load_desc(nsnaps,idens)
         descendantlist_list = descendants_grp[icount].create_dataset("NHalosDescendant", data=descendantlist)
@@ -197,7 +197,7 @@ def convert():
     #Group -- Progenitors
     icount = 0
     progenitors_grp = []
-    for idens in range(1,len(overdensities)):
+    for idens in range(len(overdensities)):
         progenitors_grp.append(f.create_group("Progenitors_"+str(idens)))
         (progenitorlist,progenitor) = load_prog(nsnaps,idens)
         progenitorlist_list = progenitors_grp[icount].create_dataset("NHalosProgenitor", data=progenitorlist)
